@@ -1,6 +1,6 @@
 package edu.ucalgary.ensf409;
 
-public class FoodItem {
+public class FoodItem implements FormatMethods{
     private final String ITEM_ID;
     private final String NAME;
     private final NutritionalContent NUTRITIONAL_CONTENT;
@@ -32,5 +32,15 @@ public class FoodItem {
     }
     public int getCalories(){
         return this.NUTRITIONAL_CONTENT.getCalories();
+    }
+    @Override
+    public String getFormattedDetailsForUser() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    @Override
+    public String toStringRepresentation() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
