@@ -41,15 +41,19 @@ class Hamper implements FormatMethods{
     @Override
     public String getFormattedDetailsForUser() {
         String s = "The food in this Hamper are in this hamper are:\n";
-        for(int i  = 0; i<contents.length; i++){
-
+        for(FoodItem c: contents){
+            s += c.toStringRepresentation();
         }
+        s += "\n\nThis hamper is for the following people:\n";
 
-        return null;
+        for(Client c: CLIENTS){
+            s += c.toStringRepresentation();
+        }
+        return s;
     }
     @Override
     public String toStringRepresentation() {
-        // TODO Auto-generated method stub
+        //idk what to do :(
         return null;
     }
 }
