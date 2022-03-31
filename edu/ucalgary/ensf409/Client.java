@@ -1,6 +1,6 @@
 package edu.ucalgary.ensf409;
 
-public class Client {
+public class Client implements FormatMethods{
     private final int CLIENT_ID;
     private final String TYPE;
     private final NutritionalContent NUTRITIONAL_NEEDS;
@@ -17,6 +17,16 @@ public class Client {
     }
     public NutritionalContent getNutritionalNeeds(){
         return this.NUTRITIONAL_NEEDS;
+    }
+    @Override
+    public String getFormattedDetailsForUser() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    @Override
+    public String toStringRepresentation() {
+        // TODO Auto-generated method stub
+        return null;
     }
     
 }
