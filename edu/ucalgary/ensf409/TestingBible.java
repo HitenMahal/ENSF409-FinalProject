@@ -10,8 +10,8 @@ public class TestingBible {
     private int[] x = {33, 4, 33, 33, 1000000};
     private int[] y = {33, 33, 33, 33, 1000000};
 
-    private FoodItem food[] = {new FoodItem("1234", "kit-kat", x),new FoodItem("4321", "kat-kit", y)};
-    private FoodItem foodBad[] = {new FoodItem("1234", "kit-kat", x),null};
+    private FoodItem food[] = {new FoodItem("1234", "kit-kat, 1 bar", x),new FoodItem("4321", "kat-kit, 1 bar", y)};
+    private FoodItem foodBad[] = {new FoodItem("1234", "kit-kat, 1 bar", x),null};
     private Client c []= {new Client(2) , new Client(4)};
     private Hamper ha = new Hamper(foodBad, c);
 
@@ -99,7 +99,7 @@ public class TestingBible {
     public void testSetHamperContents(){
         int[] yy = {11, 11, 11, 11, 10000};
         int[] xx = {11, 11, 11, 11, 100000};
-        FoodItem efo[] = {new FoodItem("1234", "katty-kit", xx),new FoodItem("4321", "kitty-kat", yy)};
+        FoodItem efo[] = {new FoodItem("1234", "katty-kit, 1 bar", xx),new FoodItem("4321", "kitty-kat, 1 bar", yy)};
         ha.setHamperContents(efo);
         FoodItem afo[] = ha.getContents();
         boolean x = false;
@@ -126,11 +126,35 @@ public class TestingBible {
             if(expected[i]!=actual[i]){
                 x =true;
             }
-        assertFalse("updateNutritionalContent did not properly updated", x);
+        assertFalse("updateNutritionalContent did not properly update", x);
         }
     }
     @Test
     public void testGetFormattedDetailsForUser(){
-        
+        String actual = ha.getFormattedDetailsForUser();
+        String expected= "1234\tkatty-kit, 1 bar\n4321\tkitty-kat, 1 bar";
+        assertEquals("the function testGetFormattedDetailsForUser returned the incorrect value",expected, actual);
+    }
+    @Test
+    public void testToStringRepresentation(){
+        String actual = ha.toStringRepresentation();
+        String c0 = c[0].toStringRepresentation();
+        String c1 = c[1].toStringRepresentation();
+        String expected = "";
+        if(c[0] == c[1]){
+            expected = "2 "+ c0;
+        }else{
+            expected = "1 "+ c0+", 1 " +c1;
+        }
+        assertEquals("the function testToStringRepresentation returned the incorrect value",expected, actual);
+    }
+    public void testDatabaseConnectionError(){
+        boolean x = false;
+        try{
+            throw new DatabaseConnectionError();
+        }catch(Exception e){
+            x= true;
+        }
+        assertTrue("DatabaseConnectionError was not thrown when asked tp", x);
     }
 }   
