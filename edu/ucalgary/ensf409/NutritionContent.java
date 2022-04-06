@@ -1,13 +1,13 @@
 package edu.ucalgary.ensf409;
 
 
-public class NutritionalContent {
+public class NutritionContent {
     private final int WHOLEGRAINS;
     private final int FRUITVEGGIES;
     private final int PROTEIN;
     private final int OTHER;
     private final int CALORIES;
-    public NutritionalContent(int wholeGrains, int fruitVeggies, int protein, int other, int calories){
+    public NutritionContent(int wholeGrains, int fruitVeggies, int protein, int other, int calories){
         this.CALORIES = calories;
         this.FRUITVEGGIES = fruitVeggies;
         this.PROTEIN = protein;
@@ -15,13 +15,13 @@ public class NutritionalContent {
         this.WHOLEGRAINS = wholeGrains;
     }
     public int[] getNutrition(){
-        int nutrition[] = {getGrains(), geFruitVeggies(), getProtein(), getOther(), getCalories()};
+        int nutrition[] = {getGrains(), getFruitVeggies(), getProtein(), getOther(), getCalories()};
         return nutrition; 
     }
     public int getGrains(){
         return this.WHOLEGRAINS;
     }
-    public int geFruitVeggies(){
+    public int getFruitVeggies(){
         return this.FRUITVEGGIES;
     }
     public int getProtein(){
