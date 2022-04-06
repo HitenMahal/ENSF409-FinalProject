@@ -1,8 +1,9 @@
 package edu.ucalgary.ensf409;
+
 class Hamper implements FormatMethods{
     private FoodItem[] contents;
     private final Client[] CLIENTS;
-    private final NutritionalContent NUTRITION_NEEDED;
+    private final NutritionContent NUTRITION_NEEDED;
     public Hamper(FoodItem[] contents, Client[] clients){
         this.contents = contents;
         this.CLIENTS = clients;
@@ -12,7 +13,7 @@ class Hamper implements FormatMethods{
                 n[i] += c.getNutritionalNeeds().getNutrition()[i];
             }
         }
-        this.NUTRITION_NEEDED = new NutritionalContent(n[0], n[1], n[2], n[3], n[4]);
+        this.NUTRITION_NEEDED = new NutritionContent(n[0], n[1], n[2], n[3], n[4]);
     }
     public FoodItem[] getContents(){
         return this.contents;
@@ -20,17 +21,17 @@ class Hamper implements FormatMethods{
     public Client[] getClients(){
         return this.CLIENTS;
     }
-    public NutritionalContent getNutritionalNeeded(){
+    public NutritionContent getNutritionalNeeded(){
         return this.NUTRITION_NEEDED;
     }
-    public NutritionalContent getNutritionalContent(){
+    public NutritionContent getNutritionalContent(){
         int[] n = {0,0,0,0,0};
         for(FoodItem c: contents ){
             for(int i = 0; i<n.length; i++){
                 n[i] += c.getNutritionalContent().getNutrition()[i];
             }
         }
-        return new NutritionalContent(n[0], n[1], n[2], n[3], n[4]);
+        return new NutritionContent(n[0], n[1], n[2], n[3], n[4]);
     }
     public void setHamperContents(FoodItem[] contents){
         this.contents = contents;
