@@ -1,5 +1,9 @@
 package edu.ucalgary.ensf409;
 
-public class Nutrition {
-    
+public enum Nutrition {
+    WHOLEGRAINS,
+    FRUITVEGGIES,
+    PROTEIN,
+    OTHER,
+    CALORIES
 }

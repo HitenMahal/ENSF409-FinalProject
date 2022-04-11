@@ -1,9 +1,7 @@
 package tests.edu.ucalgary.ensf409;
 
+import edu.ucalgary.ensf409.*;
 import static org.junit.Assert.*;
-
-import java.io.File;
-
 import org.junit.*;
 
 public class TestHamperAndFormatMethods {
@@ -61,8 +59,8 @@ public class TestHamperAndFormatMethods {
     }
     @Test
     public void testGetNutritionalNeeded(){
-        int[] expectedClient1 = c[0].getNutritionalNeeds().getNutrition();
-        int[] expectedClient2 = c[1].getNutritionalNeeds().getNutrition();
+        int[] expectedClient1 = c[0].getNutritionNeeds().getNutrition();
+        int[] expectedClient2 = c[1].getNutritionNeeds().getNutrition();
         int[] result = new int[expectedClient1.length];
         for(int i = 0; i< expectedClient1.length;i++){
             result[i] = expectedClient1[i] + expectedClient2[i];
@@ -79,8 +77,8 @@ public class TestHamperAndFormatMethods {
     }
     @Test
     public void testGetNutritionalContents(){
-        int[] expectedClient1 = food[0].getNutritionalContent().getNutrition();
-        int[] expectedClient2 = food[1].getNutritionalContent().getNutrition();
+        int[] expectedClient1 = food[0].getNutritionContent().getNutrition();
+        int[] expectedClient2 = food[1].getNutritionContent().getNutrition();
         int[] result = new int[expectedClient1.length];
         for(int i = 0; i< expectedClient1.length;i++){
             result[i] = expectedClient1[i] + expectedClient2[i];

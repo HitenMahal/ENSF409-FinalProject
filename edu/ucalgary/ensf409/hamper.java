@@ -1,6 +1,6 @@
 package edu.ucalgary.ensf409;
 
-class Hamper implements FormatMethods{
+public class Hamper implements FormatMethods{
     private FoodItem[] contents;
     private final Client[] CLIENTS;
     private final NutritionContent NUTRITION_NEEDED;
@@ -10,7 +10,7 @@ class Hamper implements FormatMethods{
         int[] n = {0,0,0,0,0};
         for(Client c: clients ){
             for(int i = 0; i<n.length; i++){
-                n[i] += c.getNutritionalNeeds().getNutrition()[i];
+                n[i] += c.getNutritionNeeds().getNutrition()[i];
             }
         }
         this.NUTRITION_NEEDED = new NutritionContent(n[0], n[1], n[2], n[3], n[4]);
@@ -28,7 +28,7 @@ class Hamper implements FormatMethods{
         int[] n = {0,0,0,0,0};
         for(FoodItem c: contents ){
             for(int i = 0; i<n.length; i++){
-                n[i] += c.getNutritionalContent().getNutrition()[i];
+                n[i] += c.getNutritionContent().getNutrition()[i];
             }
         }
         return new NutritionContent(n[0], n[1], n[2], n[3], n[4]);

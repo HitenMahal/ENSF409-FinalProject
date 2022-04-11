@@ -1,5 +1,6 @@
 package tests.edu.ucalgary.ensf409;
 
+import edu.ucalgary.ensf409.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 import java.util.*;
@@ -13,8 +14,8 @@ public class TestNutrition{
     public void TestGetNutrition(){
         NutritionContent defaultNutrition = new NutritionContent(100,0,50,120,50);
         int[] expected = {100,0,50,120,50};
-        int actual = defaultNutrition.getNutrition();
-        assertEquals("There is something wrong with getNurition", expected, actual);
+        int[] actual = defaultNutrition.getNutrition();
+        assertArrayEquals("There is something wrong with getNurition", expected, actual);
 
     }
 //Testing getGrains
@@ -29,7 +30,7 @@ public class TestNutrition{
 //Testing getFruitVeggies
 @Test
     public void TestGetFruitVeggies(){
-        NutritionContent defaultNutrition = new NutritionConent(100,0,50,120,50);
+        NutritionContent defaultNutrition = new NutritionContent(100,0,50,120,50);
         int expected = 0;
         int actual = defaultNutrition.getFruitVeggies();
         assertEquals("There is something wrong with getFruitVeggies", expected, actual);
@@ -69,24 +70,24 @@ public class TestNutrition{
 //Testing enums
 @Test 
     public void TestEnumNutritionClasses(){
-        int expected = 100;
-        int actual = NutritionClass.WHOLEGRAINS.valueOf("WHOLEGRAINS");
+        Nutrition expected = Nutrition.WHOLEGRAINS;
+        Nutrition actual = Nutrition.valueOf("WHOLEGRAINS");
         assertEquals("There is something wrong with enum method Whole Grains ",expected, actual);
 
-        expected = 0;
-        actual = NutritionClass.FRUITVEGGIES.valueOf("FRUITVEGGIES");
+        expected = Nutrition.FRUITVEGGIES;
+        actual = Nutrition.valueOf("FRUITVEGGIES");
         assertEquals("There is something wrong with enum method Fruit Veggies ",expected, actual);
 
-        expected = 50;
-        actual = actual = NutritionClass.PROTEIN.valueOf("PROTEIN");
+        expected = Nutrition.PROTEIN;
+        actual = Nutrition.valueOf("PROTEIN");
         assertEquals("There is something wrong with enum method Protein ",expected, actual);
 
-        expected = 120;
-        actual = NutritionClass.OTHER.valueOf("OTHER");
+        expected = Nutrition.OTHER;
+        actual = Nutrition.valueOf("OTHER");
         assertEquals("There is something wrong with enum method Other ",expected, actual);
 
-        expected = 50;
-        actual = NutritionClass.CALORIES.valueOf("CALORIES");
+        expected = Nutrition.CALORIES;
+        actual = Nutrition.valueOf("CALORIES");
         assertEquals("There is something wrong with enum method Calories ",expected, actual);
 
                
@@ -95,24 +96,17 @@ public class TestNutrition{
 //Testing InsufficentFoodException 
 @Test 
     public void TestInsufficentFoodException(){
+        //TODO Setup Inventory
+        String[] order = {"1","1","2"};
+
         boolean exceptionThrown = false; 
-        Hamper Hamper = new String[]{"Apple","0","0","0","0","0"};
         try{
-            Hamper Hamper = new String[]{"Apple","0","0","0","0","0"};
+            Hamper Hamper = CalculateHamper.calculateHamper(order);
         }
-        catch(InsufficentFoodException e){
+        catch(InsufficientFoodException e){
             exceptionThrown = true;
 
         }
         assertTrue("Hamper did not throw the correct exception",exceptionThrown);
-
-
-
-
-
     }
-
-
-    
-
 }

@@ -12,7 +12,7 @@ public class Order {
      * Calls createHampers()
      * @param request
      */
-    Order(String[][] request) {
+    public Order(String[][] request) throws InsufficientFoodException{
         this.REQUEST = request;
         createHampers();
     }
@@ -21,7 +21,7 @@ public class Order {
      * Uses the order requests to calculate all requested hampers and populate a Hamper[]
      * The calculated hampers can be retrieved using getHampers()
      */
-    public void createHampers() {
+    public void createHampers() throws InsufficientFoodException{
         Hamper[] calculatedHampers = new Hamper[REQUEST.length];
 
         int i = 0;

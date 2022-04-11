@@ -1,5 +1,6 @@
 package tests.edu.ucalgary.ensf409;
 
+import edu.ucalgary.ensf409.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -51,7 +52,7 @@ public class TestFoodItem {
         FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,100,0,0,624});
 
         int[] expected = new int[]{0,100,0,0,624};
-        int[] actual = testFood.getNutritionContent();
+        int[] actual = testFood.getNutritionContent().getNutrition();
 
         assertEquals("getNutritionContent did not return correct int[]", expected, actual);
     }

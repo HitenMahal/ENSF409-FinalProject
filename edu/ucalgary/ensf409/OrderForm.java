@@ -5,27 +5,20 @@ package edu.ucalgary.ensf409;
  * The OrderForm can be used to show the form to a user and/or print the form to a file
  */
 public class OrderForm {
-    private String orderForm;
-
-    /**
-     * OrderForm constructor creates a string which can be retrieved using getOrderForm()
-     */
-    OrderForm() {
-        //TODO
-    }
 
     /**
      * Getter for orderForm as a string
      * @return Form as a string
      */
-    public String getOrderForm() {
-        return orderForm;
+    public static String getOrderForm(Order order) {
+        // TODO
+        return "";
     }
 
     /**
      * Prints the form to a file named HamperX.txt where X is the hamper number
      */
-    public void printFormToFile() {
+    public static void printFormToFile(Order order) throws FileAccessException{
         //TODO
     }
 }

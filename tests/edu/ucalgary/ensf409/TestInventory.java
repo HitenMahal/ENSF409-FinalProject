@@ -1,7 +1,7 @@
 package tests.edu.ucalgary.ensf409;
 
 import org.junit.*;
-
+import edu.ucalgary.ensf409.*;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 
@@ -44,7 +44,7 @@ public class TestInventory {
         Inventory.setDatabaseURL(dbURL);
         
         String expected = dbURL;
-        String actual = testInventory.getDatabaseURL();
+        String actual = Inventory.getDatabaseURL();
         assertEquals("getDatabaseURL() did not return correct String", expected, actual);
     }
 
@@ -69,7 +69,7 @@ public class TestInventory {
         assertEquals("addFoodItem() did not correctly add food into inventory", testFood, actual);
 
         Inventory.deleteFoodItem( testFood );
-        FoodItem actual = Inventory.getInventory().get(0); // Get first Food in the Inventory
+        actual = Inventory.getInventory().get(0); // Get first Food in the Inventory
         assertNull("addFoodItem() did not correctly remove food from inventory", actual);
     }
 
@@ -78,8 +78,8 @@ public class TestInventory {
     public void testGetInventory() {
         FoodItem food1 = new FoodItem("1","Apple, dozen", new int[]{0,100,0,0,624});
         FoodItem food2 = new FoodItem("2","ham", new int[]{1,2,3});
-        Inventory.add( food1 );
-        Inventory.add( food2 );            
+        Inventory.addFoodItem( food1 );
+        Inventory.addFoodItem( food2 );            
 
         ArrayList<FoodItem> expected = new ArrayList<FoodItem>();
         expected.add( food1 );
@@ -94,31 +94,31 @@ public class TestInventory {
     @Test
     public void testGetClientNeeds() {
         NutritionContent[] clientNeeds = new NutritionContent[] {
-            new NutritionContent( new int[]{16,28,26,30,2500} ),
-            new NutritionContent( new int[]{16,28,26,30,2000} ),
-            new NutritionContent( new int[]{21,33,31,15,2200} ),
-            new NutritionContent( new int[]{21,33,31,15,1400} )
+            new NutritionContent( 16,28,26,30,2500 ),
+            new NutritionContent( 16,28,26,30,2000 ),
+            new NutritionContent( 21,33,31,15,2200 ),
+            new NutritionContent( 21,33,31,15,1400 )
         };
 
         Inventory.setClientNeeds(clientNeeds);
         NutritionContent[] expected = clientNeeds;
         NutritionContent[] actual = Inventory.getClientNeeds();
-        assertEquals("getClientNeeds does not return correct NutritionContent[]", expected, actual);
+        assertArrayEquals("getClientNeeds does not return correct NutritionContent[]", expected, actual);
     }
 
     // Tests if setClientNeeds correctly sets client_daily_needs
     @Test
     public void testSetClientNeeds() {
         NutritionContent[] clientNeeds = new NutritionContent[] {
-            new NutritionContent( new int[]{16,28,26,30,2500} ),
-            new NutritionContent( new int[]{16,28,26,30,2000} ),
-            new NutritionContent( new int[]{21,33,31,15,2200} ),
-            new NutritionContent( new int[]{21,33,31,15,1400} )
+            new NutritionContent( 16,28,26,30,2500 ),
+            new NutritionContent( 16,28,26,30,2000 ),
+            new NutritionContent( 1,33,31,15,2200 ),
+            new NutritionContent( 21,33,31,15,1400 )
         };
 
         Inventory.setClientNeeds(clientNeeds);
         NutritionContent[] expected = clientNeeds;
         NutritionContent[] actual = Inventory.getClientNeeds();
-        assertEquals("setClientNeeds does not correctly set client_daily_needs", expected, actual);
+        assertArrayEquals("setClientNeeds does not correctly set client_daily_needs", expected, actual);
     }
 }

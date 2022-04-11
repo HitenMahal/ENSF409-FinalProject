@@ -1,5 +1,6 @@
 package tests.edu.ucalgary.ensf409;
 
+import edu.ucalgary.ensf409.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -21,13 +22,13 @@ public class TestCalculateHamper {
     }
     // Tests if given a order and a inventory, that the function calculates the most efficient Hamper
     @Test
-    public void testCalculateHamper() {
+    public void testCalculateHamper() throws InsufficientFoodException{
         // Sets up correct Nutrition Needs for each type of client
         NutritionContent[] clientNeeds = new NutritionContent[] {
-            new NutritionContent( new int[]{16,28,26,30,2500} ),    // Adult Male
-            new NutritionContent( new int[]{16,28,26,30,2000} ),    // Adult Female
-            new NutritionContent( new int[]{21,33,31,15,2200} ),    // Child over 8
-            new NutritionContent( new int[]{21,33,31,15,1400} )     // Child under 8
+            new NutritionContent( 16,28,26,30,2500 ),    // Adult Male
+            new NutritionContent( 16,28,26,30,2000 ),    // Adult Female
+            new NutritionContent( 21,33,31,15,2200 ),    // Child over 8
+            new NutritionContent( 21,33,31,15,1400 )     // Child under 8
         };
         Inventory.setClientNeeds(clientNeeds);
 
@@ -42,7 +43,7 @@ public class TestCalculateHamper {
             new FoodItem("7","Tuna", new int[]{0,0,100,0,100})              // ('Tuna', 0, 0, 100, 0, 100),
         };
         for (FoodItem food : foods) {
-            Inventory.add(food);
+            Inventory.addFoodItem(food);
         }
 
         // Now calls calculateHamper and sees what hamper is made for an Adult Male given the inventory and needs above
@@ -65,10 +66,10 @@ public class TestCalculateHamper {
     public void testCalculateNutritionWaste() {
         // Sets up correct Nutrition Needs for each type of client
         NutritionContent[] clientNeeds = new NutritionContent[] {
-            new NutritionContent( new int[]{16,28,26,30,2500} ),    // Adult Male
-            new NutritionContent( new int[]{16,28,26,30,2000} ),    // Adult Female
-            new NutritionContent( new int[]{21,33,31,15,2200} ),    // Child over 8
-            new NutritionContent( new int[]{21,33,31,15,1400} )     // Child under 8
+            new NutritionContent( 16,28,26,30,2500 ),    // Adult Male
+            new NutritionContent( 16,28,26,30,2000 ),    // Adult Female
+            new NutritionContent( 21,33,31,15,2200 ),    // Child over 8
+            new NutritionContent( 21,33,31,15,1400 )     // Child under 8
         };
         Inventory.setClientNeeds(clientNeeds);
 
@@ -98,10 +99,10 @@ public class TestCalculateHamper {
     public void testCalculateHamperNutrition() {
         // Sets up correct Nutrition Needs for each type of client
         NutritionContent[] clientNeeds = new NutritionContent[] {
-            new NutritionContent( new int[]{16,28,26,30,2500} ),    // Adult Male
-            new NutritionContent( new int[]{16,28,26,30,2000} ),    // Adult Female
-            new NutritionContent( new int[]{21,33,31,15,2200} ),    // Child over 8
-            new NutritionContent( new int[]{21,33,31,15,1400} )     // Child under 8
+            new NutritionContent( 16,28,26,30,2500 ),    // Adult Male
+            new NutritionContent( 16,28,26,30,2000 ),    // Adult Female
+            new NutritionContent( 21,33,31,15,2200 ),    // Child over 8
+            new NutritionContent( 21,33,31,15,1400 )     // Child under 8
         };
         Inventory.setClientNeeds(clientNeeds);
 
@@ -122,7 +123,7 @@ public class TestCalculateHamper {
             );
 
         int[] expected = new int[] {16,28,26,30,2500};
-        int[] actual = CalculateHamper.testCalculateHamperNutrition( testHamper );
+        int[] actual = CalculateHamper.calculateHamperNutrition( testHamper );
         assertEquals("calculateHamperNutrition() did not calculate correct nutritional content", expected, actual); 
     }
 }

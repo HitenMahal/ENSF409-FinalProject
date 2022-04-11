@@ -5,7 +5,7 @@ import java.util.*;
 public class CalculateHamper{
     private static LinkedList<int[]> combinations = new LinkedList<int[]>();
 
-    public static Hamper calculateHamper(String[] order){
+    public static Hamper calculateHamper(String[] order) throws InsufficientFoodException{
         LinkedList<int[]> needs = combinations;
         ArrayList<FoodItem> foods = Inventory.getInventory();
         Client clients[] = new Client[order.length];
@@ -76,7 +76,7 @@ public class CalculateHamper{
         int[] n = {0,0,0,0,0};
         for(FoodItem c: hamper.getContents()){
             for(int i = 0; i<n.length; i++){
-                n[i] += c.getNutritionalContent().getNutrition()[i];
+                n[i] += c.getNutritionContent().getNutrition()[i];
             }
         }
         return n;

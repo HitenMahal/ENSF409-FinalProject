@@ -39,7 +39,7 @@ public class Client implements FormatMethods{
      * Getter for Nutritional Needs of the client
      * @return NutritionContent object representing the clients needs
      */
-    public NutritionContent getNutritionalNeeds(){
+    public NutritionContent getNutritionNeeds(){
         return this.NUTRITION_CONTENT;
     }
 

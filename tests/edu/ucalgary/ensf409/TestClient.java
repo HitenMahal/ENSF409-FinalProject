@@ -1,6 +1,7 @@
 package tests.edu.ucalgary.ensf409;
 
-import org.junit.Test;
+import edu.ucalgary.ensf409.*;
+import org.junit.*;
 import static org.junit.Assert.*;
 
 public class TestClient {
@@ -15,10 +16,10 @@ public class TestClient {
     @Before
     public void setupInventory() {
         NutritionContent[] clientNeeds = new NutritionContent[] {
-            new NutritionContent( new int[]{16,28,26,30,2500} ),    // Adult Male
-            new NutritionContent( new int[]{16,28,26,30,2000} ),    // Adult Female
-            new NutritionContent( new int[]{21,33,31,15,2200} ),    // Child over 8
-            new NutritionContent( new int[]{21,33,31,15,1400} )     // Child under 8
+            new NutritionContent( 16,28,26,30,2500 ),    // Adult Male
+            new NutritionContent( 16,28,26,30,2000 ),    // Adult Female
+            new NutritionContent( 21,33,31,15,2200 ),    // Child over 8
+            new NutritionContent( 21,33,31,15,1400 )     // Child under 8
         };
         Inventory.setClientNeeds( clientNeeds );
     }
@@ -60,7 +61,7 @@ public class TestClient {
         // ID of 1 is an Adult Male according to Project Handout
         // The needs of Adult Male are shown in the @Before at the top of the file
         int[] expected = new int[]{16,28,26,30,2500};  
-        int[] actual = testClient.testGetNutritionNeeds().getNurition();
+        int[] actual = testClient.getNutritionNeeds().getNutrition();
         
         assertEquals("getNutritionNeeds did not return correct int[]", expected, actual);
      }
