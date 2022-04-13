@@ -77,7 +77,7 @@ public class TestInventory {
     @Test
     public void testGetInventory() {
         FoodItem food1 = new FoodItem("1","Apple, dozen", new int[]{0,100,0,0,624});
-        FoodItem food2 = new FoodItem("2","ham", new int[]{1,2,3});
+        FoodItem food2 = new FoodItem("2","ham", new int[]{0,100,0,0,624});
         Inventory.addFoodItem( food1 );
         Inventory.addFoodItem( food2 );            
 

@@ -8,7 +8,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GUIProject extends JFrame implements ActionListener, MouseListener{
+public class GUI extends JFrame implements ActionListener, MouseListener{
 
     private int NumberofClients;
     private int TypeofClients;
@@ -20,7 +20,7 @@ public class GUIProject extends JFrame implements ActionListener, MouseListener{
     private JTextField NOCInput;
     private JTextField TOCInput;
 
-    public GUIProject(){
+    public GUI(){
         super("Ordering Form");
         setupGUI();
         setSize(600,400);
@@ -72,9 +72,9 @@ public class GUIProject extends JFrame implements ActionListener, MouseListener{
         if(validInput()){
             String NumberID = NumberIDProcessing();
             String ClientID = ClientIDProcessing();
-            JOptionPane.showMessageDialog(this, "This is the Number of clients: " + NumberID);
-            JOptionPane.showMessageDialog(this,"Client IDs: " + ClientID);
-
+            // JOptionPane.showMessageDialog(this, "This is the Number of clients: " + NumberID);
+            // JOptionPane.showMessageDialog(this,"Client IDs: " + ClientID);
+            // TODO Order Call
         }
 
     }
@@ -138,7 +138,7 @@ public class GUIProject extends JFrame implements ActionListener, MouseListener{
 
     public static void main(String args[]){
         EventQueue.invokeLater(() -> {
-            new GUIProject().setVisible(true);
+            new GUI().setVisible(true);
             //JFrame frame = new JFrame("Ordering Form");
             //frame.setSize(600,400);
             //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

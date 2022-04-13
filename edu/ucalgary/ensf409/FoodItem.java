@@ -104,4 +104,8 @@ public class FoodItem implements FormatMethods{
         String output = "";
         return output;
     }
+
+    public String toString() {
+        return NAME;
+    }
 }

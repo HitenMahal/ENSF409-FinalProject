@@ -57,8 +57,7 @@ public class TestCalculateHamper {
                         );
         FoodItem[] expected = expectedHamper.getContents();
 
-        boolean sameContents = Arrays.equals(actual, expected);
-        assertTrue("The calculated Hamper did not contain the correct contents", sameContents);
+        assertArrayEquals("The calculated Hamper did not contain the correct contents", expected, actual);
     }
 
     // Tests if given a hamper, the function returns the number of calories wasted using the hampers NUTRITION_NEEDED and nutritionContent variables

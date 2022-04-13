@@ -1,7 +1,7 @@
 package edu.ucalgary.ensf409;
 
 public class DatabaseConnectionError extends Exception{
-    DatabaseConnectionError() {
+    public DatabaseConnectionError() {
         super("Error connecting to database");
     }
 }
