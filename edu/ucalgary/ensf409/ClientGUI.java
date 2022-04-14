@@ -1,8 +1,10 @@
 package edu.ucalgary.ensf409;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+
 import javax.swing.*;
+
+
 import java.awt.event.*;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -11,6 +13,7 @@ import java.awt.event.ActionListener;
 
 public class ClientGUI extends JFrame implements ActionListener, MouseListener{
 
+    private static int Hampers;
     private int NumberofClients; 
     private int TypeofClient1;
     private int TypeofClient2;
@@ -33,13 +36,12 @@ public class ClientGUI extends JFrame implements ActionListener, MouseListener{
    
     
     public ClientGUI(){
-        super("Ordering Form");
-        setupGUI();     //calls a method to allow for GUI to work 
-        setSize(600,200);   //sizing the GUI
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Default close 
-    }
-    public void setupGUI(){
-        //instructions for the GUI 
+        //super("Ordering Form");
+        Hampers = HamperGUI.getHampers();
+        for(int i = 1; i <= Hampers; i++){
+        JFrame frame = new JFrame("Hamper " + i);
+        
+
         instructions = new JLabel("Please enter the number of clients i.e 4. and Please enter the Type of Client 1,2,3 or 4");
         //Number of clients 
         NOCLabel = new JLabel("Number of Clients");
@@ -105,13 +107,27 @@ public class ClientGUI extends JFrame implements ActionListener, MouseListener{
         
 
         submitPanel.add(submitInfo);
+        //frame.getContentPane().add(BorderLayout.NORTH, buttonsPanel);
 
         //Layout of the panels 
-        this.add(headerPanel, BorderLayout.NORTH);
-        this.add(clientPanel, BorderLayout.CENTER);
-        this.add(submitPanel, BorderLayout.PAGE_END);
+        frame.getContentPane().add(headerPanel, BorderLayout.NORTH);
+        frame.getContentPane().add(clientPanel, BorderLayout.CENTER);
+        frame.getContentPane().add(submitPanel, BorderLayout.PAGE_END);
+        
+        frame.setSize(600,200);   //sizing the GUI
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Default close 
+        frame.setVisible(true);
+
+        frame.invalidate();
+        frame.validate();
+        frame.repaint();
+
 
     }
+}
+    //String Hamper[][] = new REQUEST[Hampers][Order];
+
+
     
     public void actionPerformed(ActionEvent event){
         
@@ -242,11 +258,4 @@ public class ClientGUI extends JFrame implements ActionListener, MouseListener{
             return allValidInput;
     }
 
-    public static void main(String args[]){
-        EventQueue.invokeLater(() -> {
-            new ClientGUI().setVisible(true);
-            
-        });
-    }
-    
 }
