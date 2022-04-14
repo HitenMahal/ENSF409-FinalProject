@@ -101,6 +101,7 @@ public class FoodItem implements FormatMethods{
         return NAME;
     }
 
+    @Override
     public String toString() {
         return NAME;
     }

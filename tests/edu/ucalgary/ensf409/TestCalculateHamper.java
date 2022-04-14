@@ -56,6 +56,9 @@ public class TestCalculateHamper {
                         );
         FoodItem[] expected = expectedHamper.getContents();
 
+        System.out.println("Expected: " + expected.toString());
+        System.out.println("Actual: " + actual.toString());
+
         assertArrayEquals("The calculated Hamper did not contain the correct contents", expected, actual);
     }
 
@@ -124,6 +127,7 @@ public class TestCalculateHamper {
 
         int[] expected = new int[] {16,28,26,30,2500};
         int[] actual = CalculateHamper.calculateHamperNutrition( testHamper );
+
         assertArrayEquals("calculateHamperNutrition() did not calculate correct nutritional content", expected, actual); 
     }
 }
