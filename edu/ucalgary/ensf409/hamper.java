@@ -52,6 +52,15 @@ public class Hamper implements FormatMethods{
                 totalNutrition[i] += foodNutrition[i];
             }
         }
+        this.nutritionContent = new NutritionContent(totalNutrition);
+    }
+
+    public String getFormattedClients() {
+        String output = "";
+        for (Client client : CLIENTS) {
+            output += client.getFormattedDetailsForUser() + ", ";
+        }
+        return output.substring(0, output.length() - 2);
     }
 
     @Override
@@ -60,7 +69,7 @@ public class Hamper implements FormatMethods{
         for(FoodItem food: contents){
             output += food.getFormattedDetailsForUser() + "\n";
         }
-        return output;
+        return output.strip();
     }
 
     @Override
@@ -74,6 +83,6 @@ public class Hamper implements FormatMethods{
         for(Client client: CLIENTS){
             output += client.toStringRepresentation() + "\n";
         }
-        return output;
+        return output.strip();
     }
 }

@@ -90,9 +90,7 @@ public class FoodItem implements FormatMethods{
      */
     @Override
     public String getFormattedDetailsForUser() {
-        // TODO Auto-generated method stub
-        String output = "";
-        return output;
+        return ITEM_ID + "\t" + NAME;
     }
 
     /**
@@ -100,9 +98,7 @@ public class FoodItem implements FormatMethods{
      */
     @Override
     public String toStringRepresentation() {
-        // TODO Auto-generated method stub
-        String output = "";
-        return output;
+        return NAME;
     }
 
     public String toString() {

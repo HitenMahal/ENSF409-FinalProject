@@ -64,8 +64,7 @@ public class Client implements FormatMethods{
      */
     @Override
     public String getFormattedDetailsForUser() {
-        // TODO Auto-generated method stub
-        return null;
+        return TYPE;
     }
 
     /**
@@ -73,8 +72,7 @@ public class Client implements FormatMethods{
      */
     @Override
     public String toStringRepresentation() {
-        // TODO Auto-generated method stub
-        return null;
+        return TYPE;
     }
     
 }

@@ -140,7 +140,7 @@ public class TestHamperAndFormatMethods {
     public void testGetFormattedDetailsForUser(){
         Hamper testHamper = new Hamper( validFoods, validClients);
         String actual = testHamper.getFormattedDetailsForUser();
-        String expected= "1234\tkatty-kit, 1 bar\n4321\tkitty-kat, 1 bar";
+        String expected= "1234\tkit-kat, 1 bar\n4321\tkat-kit, 1 bar";
 
         assertEquals("getFormattedDetailsForUser did not return the correct string",expected, actual);
     }
@@ -150,9 +150,8 @@ public class TestHamperAndFormatMethods {
     public void testToStringRepresentation(){
         Hamper testHamper = new Hamper( validFoods, validClients);
 
-        String actual = testHamper.getFormattedDetailsForUser();
-        String expected= "1234\tkatty-kit, 1 bar\n4321\tkitty-kat, 1 bar";
-        //TODO
+        String actual = testHamper.toStringRepresentation();
+        String expected= "This Hamper contains:\nkit-kat, 1 bar\nkat-kit, 1 bar\nThis hamper will feed the following:\nAdult Male\nAdult Female";
 
         assertEquals("toStringRepresentation did not return the correct string",expected, actual);
     }
