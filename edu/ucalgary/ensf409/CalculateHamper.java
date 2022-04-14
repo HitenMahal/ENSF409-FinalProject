@@ -33,7 +33,7 @@ public class CalculateHamper{
                 hamper = compare;
             }
         }
-        if(hamper == null||checkRequirementsMet(hamper)){
+        if(hamper == null || !checkRequirementsMet(hamper)){
             throw new InsufficientFoodException();
         }
         return hamper;
