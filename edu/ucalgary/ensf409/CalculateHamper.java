@@ -16,6 +16,7 @@ public class CalculateHamper{
         for(int i = 1;i<foods.size();i++){
             combination(foods.size(),1, i);
         }
+        int[] theChosenOne = null;
         for(int[] c:combinations){
             FoodItem[] food = new FoodItem[c.length];
             for(int i = 0; i<c.length;i++){
@@ -27,14 +28,19 @@ public class CalculateHamper{
             }
             if(hamper ==null){
                 hamper = new Hamper(food, clients);
+                theChosenOne = c;
                 continue;
             }
             if(calculateNutritionWaste(compare) <calculateNutritionWaste(hamper)){
+                theChosenOne = c;
                 hamper = compare;
             }
         }
         if(hamper == null || !checkRequirementsMet(hamper)){
             throw new InsufficientFoodException();
+        }
+        for(int i=0; i<theChosenOne.length;i++){
+            Inventory.removeFromDatabase(Integer.valueOf(foods.get(i).getItemID()));
         }
         return hamper;
     }
