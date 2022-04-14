@@ -115,7 +115,7 @@ public class TestCalculateHamper {
         // As shown in the first test above, this hamper has exactly what the client will need
         // The nutrition of the hamper will be exactly [16,28,26,30,2500] note that is also the exact client needs
         Hamper testHamper = new Hamper( 
-            new FoodItem[]{ foods[0], foods[1], foods[2], foods[5], foods[6]}, 
+            new FoodItem[]{ foods[0], foods[1], foods[2], foods[5]}, 
             new Client[]{ new Client(1) }    // Client(id 1) = Adult Male (according to Project Handout)
             );
 
