@@ -4,10 +4,13 @@ public class Hamper implements FormatMethods{
     private FoodItem[] contents;
     private final Client[] CLIENTS;
     private final NutritionContent NUTRITION_NEEDED;
+    private NutritionContent nutritionContent;
 
-    public Hamper(FoodItem[] contents, Client[] clients){
+    public Hamper(FoodItem[] contents, Client[] clients) throws IllegalArgumentException{
         this.contents = contents;
         this.CLIENTS = clients;
+
+        // calculates the required nutrition for the given clients
         int[] n = {0,0,0,0,0};
         for(Client c: clients ){
             for(int i = 0; i<n.length; i++){
@@ -15,6 +18,7 @@ public class Hamper implements FormatMethods{
             }
         }
         this.NUTRITION_NEEDED = new NutritionContent(n[0], n[1], n[2], n[3], n[4]);
+        updateNutritionContent();
     }
 
     public FoodItem[] getContents(){
@@ -30,40 +34,46 @@ public class Hamper implements FormatMethods{
     }
 
     public NutritionContent getNutritionContent(){
-        int[] n = {0,0,0,0,0};
-        for(FoodItem c: contents ){
-            for(int i = 0; i<n.length; i++){
-                n[i] += c.getNutritionContent().getNutrition()[i];
-            }
-        }
-        return new NutritionContent(n[0], n[1], n[2], n[3], n[4]);
+        return this.nutritionContent;
     }
 
     public void setHamperContents(FoodItem[] contents){
         this.contents = contents;
     }
 
-    public void updateNutritionContent(){
-
+    public void updateNutritionContent() throws IllegalArgumentException{
+        int[] totalNutrition = {0,0,0,0,0};
+        for(FoodItem food: contents ){
+            if (food == null) {
+                throw new IllegalArgumentException();
+            }
+            int[] foodNutrition = food.getNutritionContent().getNutrition();
+            for (int i=0; i < totalNutrition.length; i++) {
+                totalNutrition[i] += foodNutrition[i];
+            }
+        }
     }
 
     @Override
     public String getFormattedDetailsForUser() {
-        String s = "The food in this Hamper are in this hamper are:\n";
-        for(FoodItem c: contents){
-            s += c.toStringRepresentation();
+        String output = "";
+        for(FoodItem food: contents){
+            output += food.getFormattedDetailsForUser() + "\n";
         }
-        s += "\n\nThis hamper is for the following people:\n";
-
-        for(Client c: CLIENTS){
-            s += c.toStringRepresentation();
-        }
-        return s;
+        return output;
     }
-    
+
     @Override
     public String toStringRepresentation() {
-        //idk what to do :(
-        return null;
+        String output = "This Hamper contains:\n";
+        for(FoodItem food: contents){
+            output += food.toStringRepresentation() + "\n";
+        }
+
+        output += "\nThis hamper will feed the following:\n";
+        for(Client client: CLIENTS){
+            output += client.toStringRepresentation() + "\n";
+        }
+        return output;
     }
 }
