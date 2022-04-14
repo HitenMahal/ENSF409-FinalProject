@@ -15,14 +15,15 @@ public class TestClient {
     // Setup static inventory before each test
     @Before
     public void setupInventory() {
-        NutritionContent[] clientNeeds = new NutritionContent[] {
-            new NutritionContent( 16,28,26,30,2500 ),    // Adult Male
-            new NutritionContent( 16,28,26,30,2000 ),    // Adult Female
-            new NutritionContent( 21,33,31,15,2200 ),    // Child over 8
-            new NutritionContent( 21,33,31,15,1400 )     // Child under 8
-        };
-        Inventory.setClientNeeds( clientNeeds );
-    }
+      Inventory.setClientNeeds( 
+         new NutritionContent[] {
+            new NutritionContent( 400,700,650,750,2500 ),   // Adult Male
+            new NutritionContent( 320,560,520,600,2000 ),   // Adult Female
+            new NutritionContent( 462,726,682,330,2200 ),   // Child Over 8
+            new NutritionContent( 294,462,434,210,1400 )    // Child Under 8
+         }
+      );
+   }
 
      @Test
      public void testClientConstructor() {

@@ -69,8 +69,7 @@ public class TestInventory {
         assertEquals("addFoodItem() did not correctly add food into inventory", testFood, actual);
 
         Inventory.deleteFoodItem( testFood );
-        actual = Inventory.getInventory().get(0); // Get first Food in the Inventory
-        assertNull("addFoodItem() did not correctly remove food from inventory", actual);
+        assertTrue("addFoodItem() did not correctly remove food from inventory", Inventory.getInventory().isEmpty());
     }
 
     // Tests if getInventory() returns a inventory object with the correct FoodItems in it

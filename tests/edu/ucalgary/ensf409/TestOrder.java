@@ -6,7 +6,8 @@ import org.junit.*;
 
 public class TestOrder
 {
-    public String[][] request = {{"Chocolate bar"}, {"sandwitch"}, {"pickles"}, {"cheese"}, {"shawarma", "fires"}, {"hamburger", "rosted potatoes"}, {"cerial", "milk"}};
+    // Request[0] is for one adult male
+    public String[][] request = { {"1"} };
 
     /**
      * sends in a valid request
@@ -28,6 +29,17 @@ public class TestOrder
         for (FoodItem food : foods) {
             Inventory.addFoodItem(food);
         }
+
+        // Setup Client Needs for the test
+        Inventory.setClientNeeds( 
+            new NutritionContent[] {
+                new NutritionContent( 400,700,650,750,2500 ),   // Adult Male
+                new NutritionContent( 320,560,520,600,2000 ),   // Adult Female
+                new NutritionContent( 462,726,682,330,2200 ),   // Child Over 8
+                new NutritionContent( 294,462,434,210,1400 )    // Child Under 8
+            }
+        );
+
 
         Order order = new Order(request);
 
@@ -61,15 +73,24 @@ public class TestOrder
         for (FoodItem food : foods) {
             Inventory.addFoodItem(food);
         }
+        // Setup Client Needs for the test
+        Inventory.setClientNeeds( 
+            new NutritionContent[] {
+                new NutritionContent( 400,700,650,750,2500 ),   // Adult Male
+                new NutritionContent( 320,560,520,600,2000 ),   // Adult Female
+                new NutritionContent( 462,726,682,330,2200 ),   // Child Over 8
+                new NutritionContent( 294,462,434,210,1400 )    // Child Under 8
+            }
+        );
+
 
         Order order = new Order(request);
         order.createHampers();
 
-        FoodItem expected[] = new Hamper( 
-            new FoodItem[]{ foods[0], foods[1], foods[2], foods[5]}, 
-            new Client[]{ new Client(1) }    // Client(id 1) = Adult Male (according to Project Handout)
-            ).getContents();
-        FoodItem actual[] = order.getHampers()[0].getContents();
+        // The given inventory will be able to meet the needs of the one male adult exactly and so the following should be the nutrition of the hamper
+        int[] expected =  {400,700,650,750,2500};
+        // Get the actual nutrition of the hamper created for the order
+        int[] actual = order.getHampers()[0].getNutritionContent().getNutrition();
 
         assertArrayEquals("createHampers() did not correctly calculate the correct hampers", expected, actual);
     }

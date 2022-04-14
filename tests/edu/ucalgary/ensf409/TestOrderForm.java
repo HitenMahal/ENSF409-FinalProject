@@ -5,7 +5,33 @@ import org.junit.*;
 import edu.ucalgary.ensf409.*;
 
 public class TestOrderForm {
-    public String[][] request = {{"Chocolate bar"}, {"sandwitch"}, {"pickles"}, {"cheese"}, {"shawarma", "fires"}, {"hamburger", "rosted potatoes"}, {"cerial", "milk"}};
+    public String[][] request = { {"1"} };
+
+    @BeforeClass
+    public static void setupInventory() {
+        FoodItem[] foods = new FoodItem[] {
+            new FoodItem("1","Apple, dozen", new int[]{0,100,0,0,624}),     // ('Apple, dozen', 0, 100, 0, 0, 700),
+            new FoodItem("2","Ham", new int[]{0,0,100,0,900}),              // ('Ham', 0, 0, 100, 0, 250),     
+            new FoodItem("3","Spam", new int[]{50,0,50,0,800}),             // ('Spam', 50, 0, 50, 0, 800),
+            new FoodItem("4","Eggs, dozen", new int[]{0,0,9,91,864}),       // ('Eggs, dozen', 0, 0, 9, 91, 864),
+            new FoodItem("5","Banana, bunch 5", new int[]{0,97,3,0,605}),   // ('Banana, bunch 5', 0, 97, 3, 0, 605), 
+            new FoodItem("6","Mineral Water", new int[]{0,0,0,100,750}),    // ('Mineral Water', 0, 0, 0, 100, 750),
+            new FoodItem("7","Tuna", new int[]{0,0,100,0,100})              // ('Tuna', 0, 0, 100, 0, 100),
+        };
+        for (FoodItem food : foods) {
+            Inventory.addFoodItem(food);
+        }
+
+        // Setup Client Needs for the test
+        Inventory.setClientNeeds( 
+            new NutritionContent[] {
+                new NutritionContent( 400,700,650,750,2500 ),   // Adult Male
+                new NutritionContent( 320,560,520,600,2000 ),   // Adult Female
+                new NutritionContent( 462,726,682,330,2200 ),   // Child Over 8
+                new NutritionContent( 294,462,434,210,1400 )    // Child Under 8
+            }
+        );
+    }
 
     /**
      * sends in a order from the user

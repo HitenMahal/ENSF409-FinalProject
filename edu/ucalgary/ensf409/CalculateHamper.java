@@ -10,17 +10,7 @@ public class CalculateHamper{
         ArrayList<FoodItem> foods = Inventory.getInventory();
         Client clients[] = new Client[order.length];
         for(int i = 0; i<order.length; i++){
-            if(order[i].equals("Adult Male")){
-                clients[i] = new Client(1);
-            }else if(order[i].equals("Adult Female")){
-                clients[i] = new Client(2);
-            }else if(order[i].equals("Child Under 8")){
-                clients[i] = new Client(3);
-            }else if(order[i].equals("Child Over 8")){
-                clients[i] = new Client(4);
-            }else{
-                throw new IllegalArgumentException();
-            }
+            clients[i] = new Client( Integer.parseInt(order[i]) );
         }
         Hamper hamper = null;
         for(int i = 1;i<foods.size();i++){

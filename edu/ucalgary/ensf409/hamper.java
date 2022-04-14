@@ -79,7 +79,7 @@ public class Hamper implements FormatMethods{
             output += food.toStringRepresentation() + "\n";
         }
 
-        output += "\nThis hamper will feed the following:\n";
+        output += "This hamper will feed the following:\n";
         for(Client client: CLIENTS){
             output += client.toStringRepresentation() + "\n";
         }

@@ -92,21 +92,4 @@ public class TestNutrition{
 
                
     }
-
-//Testing InsufficentFoodException 
-@Test 
-    public void TestInsufficentFoodException(){
-        //TODO Setup Inventory
-        String[] order = {"1","1","2"};
-
-        boolean exceptionThrown = false; 
-        try{
-            Hamper Hamper = CalculateHamper.calculateHamper(order);
-        }
-        catch(InsufficientFoodException e){
-            exceptionThrown = true;
-
-        }
-        assertTrue("Hamper did not throw the correct exception",exceptionThrown);
-    }
 }
