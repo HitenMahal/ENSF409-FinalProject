@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 
 public class HamperGUI extends JFrame implements ActionListener, MouseListener{
 
-    private int NumberofHampers;
+    private static int NumberofHampers;
 
     private JLabel instructions;
     private JLabel HamperLabel;
@@ -76,7 +76,7 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
             JOptionPane.showMessageDialog(this, "Number of Hampers: " + Hampers);
             new ClientGUI();
             EventQueue.invokeLater(() -> {
-                new ClientGUI().setVisible(true);
+                //new ClientGUI().setVisible(true);
 
             });
 
@@ -118,12 +118,15 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
     private boolean validInput(){
         boolean allValidInput = true;
 
-        if(NumberofHampers <= 0 || NumberofHampers > 9){
+        if(NumberofHampers <= 0 || NumberofHampers > 10){
             allValidInput = false;
             JOptionPane.showMessageDialog(this,NumberofHampers + "is an invalid input");
         }
 
         return allValidInput;
+    }
+    public static int getHampers(){
+        return NumberofHampers;
     }
 
 
