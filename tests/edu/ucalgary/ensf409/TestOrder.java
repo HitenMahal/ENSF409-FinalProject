@@ -18,11 +18,11 @@ public class TestOrder
     {
         // Setup Inventory for the test
         FoodItem[] foods = new FoodItem[] {
-            new FoodItem("1","Apple, dozen", new int[]{0,624,0,0,624}),     // ('Apple, dozen', 0, 100, 0, 0, 700),
-            new FoodItem("2","Ham", new int[]{0,0,900,0,900}),              // ('Ham', 0, 0, 100, 0, 250),     
-            new FoodItem("3","Spam", new int[]{400,0,400,0,800}),             // ('Spam', 50, 0, 50, 0, 800),
-            new FoodItem("4","Eggs, dozen", new int[]{0,0,4,786,790}),       // ('Eggs, dozen', 0, 0, 9, 91, 864),
-            new FoodItem("5","Banana, bunch 5", new int[]{0,582,23,0,605}),   // ('Banana, bunch 5', 0, 97, 3, 0, 605), 
+            new FoodItem("1","Apple, dozen", new int[]{0,700,0,0,700}),     // ('Apple, dozen', 0, 100, 0, 0, 700),
+            new FoodItem("2","Ham", new int[]{0,0,250,0,250}),              // ('Ham', 0, 0, 100, 0, 250),     
+            new FoodItem("3","Spam", new int[]{400,0,400,0,800}),           // ('Spam', 50, 0, 50, 0, 800),
+            new FoodItem("4","Eggs, dozen", new int[]{0,0,4,786,864}),      // ('Eggs, dozen', 0, 0, 9, 91, 864),
+            new FoodItem("5","Banana, bunch 5", new int[]{0,582,23,0,605}), // ('Banana, bunch 5', 0, 97, 3, 0, 605), 
             new FoodItem("6","Mineral Water", new int[]{0,0,0,750,750}),    // ('Mineral Water', 0, 0, 0, 100, 750),
             new FoodItem("7","Tuna", new int[]{0,0,100,0,100})              // ('Tuna', 0, 0, 100, 0, 100),
         };
@@ -62,11 +62,11 @@ public class TestOrder
     {
         // Setup Inventory for the test
         FoodItem[] foods = new FoodItem[] {
-            new FoodItem("1","Apple, dozen", new int[]{0,624,0,0,624}),     // ('Apple, dozen', 0, 100, 0, 0, 700),
-            new FoodItem("2","Ham", new int[]{0,0,900,0,900}),              // ('Ham', 0, 0, 100, 0, 250),     
-            new FoodItem("3","Spam", new int[]{400,0,400,0,800}),             // ('Spam', 50, 0, 50, 0, 800),
-            new FoodItem("4","Eggs, dozen", new int[]{0,0,4,786,790}),       // ('Eggs, dozen', 0, 0, 9, 91, 864),
-            new FoodItem("5","Banana, bunch 5", new int[]{0,582,23,0,605}),   // ('Banana, bunch 5', 0, 97, 3, 0, 605), 
+            new FoodItem("1","Apple, dozen", new int[]{0,700,0,0,700}),     // ('Apple, dozen', 0, 100, 0, 0, 700),
+            new FoodItem("2","Ham", new int[]{0,0,250,0,250}),              // ('Ham', 0, 0, 100, 0, 250),     
+            new FoodItem("3","Spam", new int[]{400,0,400,0,800}),           // ('Spam', 50, 0, 50, 0, 800),
+            new FoodItem("4","Eggs, dozen", new int[]{0,0,4,786,864}),      // ('Eggs, dozen', 0, 0, 9, 91, 864),
+            new FoodItem("5","Banana, bunch 5", new int[]{0,582,23,0,605}), // ('Banana, bunch 5', 0, 97, 3, 0, 605), 
             new FoodItem("6","Mineral Water", new int[]{0,0,0,750,750}),    // ('Mineral Water', 0, 0, 0, 100, 750),
             new FoodItem("7","Tuna", new int[]{0,0,100,0,100})              // ('Tuna', 0, 0, 100, 0, 100),
         };
