@@ -40,7 +40,7 @@ public class CalculateHamper{
             throw new InsufficientFoodException();
         }
         for(int i=0; i<theChosenOne.length;i++){
-            Inventory.removeFromDatabase(Integer.valueOf(foods.get(i).getItemID()));
+            Inventory.deleteFoodItem(foods.get(i));
         }
         return hamper;
     }
