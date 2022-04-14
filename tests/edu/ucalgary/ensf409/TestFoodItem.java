@@ -19,7 +19,7 @@ public class TestFoodItem {
 
     @Test
     public void testFoodItemConstructor() {
-        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,100,0,0,624});
+        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,624,0,0,624});
 
         String expected = "Apple, dozen";
         String actual = testFood.getName();
@@ -29,7 +29,7 @@ public class TestFoodItem {
 
     @Test
     public void testGetItemID() {
-        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,100,0,0,624});
+        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,624,0,0,624});
 
         String expected = "1";
         String actual = testFood.getItemID();
@@ -39,7 +39,7 @@ public class TestFoodItem {
 
     @Test
     public void testGetName() {
-        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,100,0,0,624});
+        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,624,0,0,624});
 
         String expected = "Apple, dozen";
         String actual = testFood.getName();
@@ -49,7 +49,7 @@ public class TestFoodItem {
 
     @Test
     public void testGetNutritionContent() {
-        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,100,0,0,624});
+        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,624,0,0,624});
 
         int[] expected = new int[]{0,100,0,0,624};
         int[] actual = testFood.getNutritionContent().getNutrition();
@@ -59,7 +59,7 @@ public class TestFoodItem {
 
     @Test
     public void testGetGrains() {
-        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,100,0,0,624});
+        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,624,0,0,624});
 
         int expected = 0;
         int actual = testFood.getGrains();
@@ -69,7 +69,7 @@ public class TestFoodItem {
 
     @Test
     public void testGetFruitVeggies() {
-        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,100,0,0,624});
+        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,624,0,0,624});
 
         int expected = 100;
         int actual = testFood.getFruitVeggies();
@@ -79,7 +79,7 @@ public class TestFoodItem {
 
     @Test
     public void testGetProtein() {
-        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,100,0,0,624});
+        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,624,0,0,624});
 
         int expected = 0;
         int actual = testFood.getProtein();
@@ -89,7 +89,7 @@ public class TestFoodItem {
 
     @Test
     public void testGetOther() {
-        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,100,0,0,624});
+        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,624,0,0,624});
 
         int expected = 0;
         int actual = testFood.getOther();
@@ -99,7 +99,7 @@ public class TestFoodItem {
 
     @Test
     public void testGetCalories() {
-        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,100,0,0,624});
+        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,624,0,0,624});
 
         int expected = 624;
         int actual = testFood.getCalories();

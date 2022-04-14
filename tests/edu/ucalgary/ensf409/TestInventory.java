@@ -51,7 +51,7 @@ public class TestInventory {
     // Tests that addFoodItem() correctly adds FoodItem to ArrayList<FoodItem> inventory
     @Test
     public void testAddFoodItem() {
-        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,100,0,0,624});
+        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,624,0,0,624});
         Inventory.addFoodItem( testFood );
 
         FoodItem expected = testFood;
@@ -62,7 +62,7 @@ public class TestInventory {
     // Tests that removeFoodItem() correctly removes FoodItem from ArrayList<FoodItem> inventory
     @Test
     public void testRemoveFoodItem() {
-        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,100,0,0,624});
+        FoodItem testFood = new FoodItem("1","Apple, dozen", new int[]{0,624,0,0,624});
         Inventory.addFoodItem( testFood );
         FoodItem actual = Inventory.getInventory().get(0); // Get first Food in the Inventory
 
@@ -75,8 +75,8 @@ public class TestInventory {
     // Tests if getInventory() returns a inventory object with the correct FoodItems in it
     @Test
     public void testGetInventory() {
-        FoodItem food1 = new FoodItem("1","Apple, dozen", new int[]{0,100,0,0,624});
-        FoodItem food2 = new FoodItem("2","ham", new int[]{0,100,0,0,624});
+        FoodItem food1 = new FoodItem("1","Apple, dozen", new int[]{0,624,0,0,624});
+        FoodItem food2 = new FoodItem("2","ham", new int[]{0,0,624,0,624});
         Inventory.addFoodItem( food1 );
         Inventory.addFoodItem( food2 );            
 
@@ -93,10 +93,10 @@ public class TestInventory {
     @Test
     public void testGetClientNeeds() {
         NutritionContent[] clientNeeds = new NutritionContent[] {
-            new NutritionContent( 16,28,26,30,2500 ),
-            new NutritionContent( 16,28,26,30,2000 ),
-            new NutritionContent( 21,33,31,15,2200 ),
-            new NutritionContent( 21,33,31,15,1400 )
+            new NutritionContent( 400,700,650,750,2500 ),   // Adult Male
+            new NutritionContent( 320,560,520,600,2000 ),   // Adult Female
+            new NutritionContent( 462,726,682,330,2200 ),   // Child Over 8
+            new NutritionContent( 294,462,434,210,1400 )    // Child Under 8
         };
 
         Inventory.setClientNeeds(clientNeeds);
@@ -109,10 +109,10 @@ public class TestInventory {
     @Test
     public void testSetClientNeeds() {
         NutritionContent[] clientNeeds = new NutritionContent[] {
-            new NutritionContent( 16,28,26,30,2500 ),
-            new NutritionContent( 16,28,26,30,2000 ),
-            new NutritionContent( 1,33,31,15,2200 ),
-            new NutritionContent( 21,33,31,15,1400 )
+            new NutritionContent( 400,700,650,750,2500 ),   // Adult Male
+            new NutritionContent( 320,560,520,600,2000 ),   // Adult Female
+            new NutritionContent( 462,726,682,330,2200 ),   // Child Over 8
+            new NutritionContent( 294,462,434,210,1400 )    // Child Under 8
         };
 
         Inventory.setClientNeeds(clientNeeds);

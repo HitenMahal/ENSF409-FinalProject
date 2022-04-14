@@ -61,7 +61,7 @@ public class TestClient {
 
         // ID of 1 is an Adult Male according to Project Handout
         // The needs of Adult Male are shown in the @Before at the top of the file
-        int[] expected = new int[]{16,28,26,30,2500};  
+        int[] expected = new int[]{400, 700, 650, 750, 2500};  
         int[] actual = testClient.getNutritionNeeds().getNutrition();
         
         assertArrayEquals("getNutritionNeeds did not return correct int[]", expected, actual);

@@ -125,7 +125,7 @@ public class TestCalculateHamper {
             new Client[]{ new Client(1) }    // Client(id 1) = Adult Male (according to Project Handout)
             );
 
-        int[] expected = new int[] {16,28,26,30,2500};
+        int[] expected = new int[] {400, 700, 650, 750, 2500};
         int[] actual = CalculateHamper.calculateHamperNutrition( testHamper );
 
         assertArrayEquals("calculateHamperNutrition() did not calculate correct nutritional content", expected, actual); 
