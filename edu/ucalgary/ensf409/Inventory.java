@@ -8,8 +8,8 @@ public class Inventory
     private static String database_URL;
     private static NutritionContent[] client_daily_needs;
     static ArrayList <FoodItem> inventory = new ArrayList<>();
-    private Connection dbConnect;
-    private ResultSet results;
+    private static Connection dbConnect;
+    private static ResultSet results;
     
     public Inventory()
     {
@@ -47,7 +47,7 @@ public class Inventory
     }
 
     //methords
-    public void uploadInventory(String itemID, String name, String NUTRITION_CONTENT)
+    public static void uploadInventory(String itemID, String name, String NUTRITION_CONTENT)
     {
         try {
             String query = "INSERT INTO cats (itemID, name, NUTRITION_CONTENT) VALUES (?,?,?)"; //get the new values.
@@ -66,19 +66,25 @@ public class Inventory
         }
     }
 
-    public void downloadDatabase()
+    public static void downloadDatabase()
     {
         inventory.clear(); //Clear inventory to make sure the downloaded inventory is all we have
         try
         {
-            dbConnect = DriverManager.getConnection("jdbc:mysql://localhost/Order", "user1", "ensf");   //connect to the database using user1 and pass ensf
+            dbConnect = DriverManager.getConnection("jdbc:mysql://localhost/FOOD_INVENTORY", "student", "ensf");   //connect to the database using user1 and pass ensf
             Statement myStmt = dbConnect.createStatement(); //creates Statement to use
-            results = myStmt.executeQuery("SELECT * FROM Order");   //executes the following Statment
+            results = myStmt.executeQuery("SELECT * FROM available_food");   //executes the following Statment
 
-            int [] nutContent = {1};      /////////I'm not sure how to get an int array from the database and send it to food item
             while (results.next())
             {
-                FoodItem item = new FoodItem(results.getString("itemID"), results.getString("name"), nutContent);
+                int itemID = results.getInt("ItemID");
+                String Name = results.getString("Name");
+                int GrainContent = results.getInt("GrainContent");
+                int FVContent = results.getInt("FVContent");
+                int ProContent = results.getInt("ProContent");
+                int Other = results.getInt("Other");
+                int Calories = results.getInt("Calories");
+                FoodItem item = new FoodItem(itemID, Name, );
                 inventory.add(item);
             }
             myStmt.close();
