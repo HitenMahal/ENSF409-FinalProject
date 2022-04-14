@@ -63,6 +63,6 @@ public class TestClient {
         int[] expected = new int[]{16,28,26,30,2500};  
         int[] actual = testClient.getNutritionNeeds().getNutrition();
         
-        assertEquals("getNutritionNeeds did not return correct int[]", expected, actual);
+        assertArrayEquals("getNutritionNeeds did not return correct int[]", expected, actual);
      }
 }

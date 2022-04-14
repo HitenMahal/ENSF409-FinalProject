@@ -15,8 +15,23 @@ public class Client implements FormatMethods{
      */
     public Client(int client_ID){
         this.CLIENT_ID = client_ID;
-        this.TYPE ="";
-        this.NUTRITION_CONTENT = new NutritionContent(0, 0, 0, 0, 0);
+        switch(client_ID) {
+            case 1: 
+                this.TYPE = "Adult Male";
+                break;
+            case 2: 
+                this.TYPE = "Adult Female";
+                break;
+            case 3:
+                this.TYPE = "Child Over 8";
+                break;
+            case 4:
+                this.TYPE = "Child Under 8";
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+        this.NUTRITION_CONTENT = new NutritionContent( Inventory.getClientNeed(client_ID) );
     }
 
     /**

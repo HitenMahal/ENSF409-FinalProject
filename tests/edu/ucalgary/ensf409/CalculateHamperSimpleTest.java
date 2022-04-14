@@ -83,8 +83,8 @@ public class CalculateHamperSimpleTest{
         return n;
     }
     private static boolean checkRequirementsMet(Hamper hamper1){
-        int[] foods = hamper1.getNutritionalContent().getNutrition();
-        int[] needs = hamper1.getNutritionalNeeded().getNutrition();
+        int[] foods = hamper1.getNutritionContent().getNutrition();
+        int[] needs = hamper1.getNutritionNeeded().getNutrition();
         for(int i = 0; i<5;i++){
             if(foods[i]-needs[i]<0){
                 return false;
@@ -94,8 +94,8 @@ public class CalculateHamperSimpleTest{
     }
 
     public static int calculateNutritionWaste(Hamper hamper){
-        int[] items = hamper.getNutritionalContent().getNutrition();
-        int[] needed =hamper.getNutritionalNeeded().getNutrition();
+        int[] items = hamper.getNutritionContent().getNutrition();
+        int[] needed =hamper.getNutritionNeeded().getNutrition();
         int waste = 0;
         for(int i =0;i<5;i++){
             waste += items[i]-needed[i];

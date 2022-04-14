@@ -4,6 +4,7 @@ public class Hamper implements FormatMethods{
     private FoodItem[] contents;
     private final Client[] CLIENTS;
     private final NutritionContent NUTRITION_NEEDED;
+
     public Hamper(FoodItem[] contents, Client[] clients){
         this.contents = contents;
         this.CLIENTS = clients;
@@ -15,16 +16,20 @@ public class Hamper implements FormatMethods{
         }
         this.NUTRITION_NEEDED = new NutritionContent(n[0], n[1], n[2], n[3], n[4]);
     }
+
     public FoodItem[] getContents(){
         return this.contents;
     }
+
     public Client[] getClients(){
         return this.CLIENTS;
     }
-    public NutritionContent getNutritionalNeeded(){
+
+    public NutritionContent getNutritionNeeded(){
         return this.NUTRITION_NEEDED;
     }
-    public NutritionContent getNutritionalContent(){
+
+    public NutritionContent getNutritionContent(){
         int[] n = {0,0,0,0,0};
         for(FoodItem c: contents ){
             for(int i = 0; i<n.length; i++){
@@ -33,12 +38,15 @@ public class Hamper implements FormatMethods{
         }
         return new NutritionContent(n[0], n[1], n[2], n[3], n[4]);
     }
+
     public void setHamperContents(FoodItem[] contents){
         this.contents = contents;
     }
+
     public void updateNutritionContent(){
 
     }
+
     @Override
     public String getFormattedDetailsForUser() {
         String s = "The food in this Hamper are in this hamper are:\n";
@@ -52,6 +60,7 @@ public class Hamper implements FormatMethods{
         }
         return s;
     }
+    
     @Override
     public String toStringRepresentation() {
         //idk what to do :(

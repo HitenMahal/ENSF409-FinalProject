@@ -42,6 +42,10 @@ public class Inventory
         return client_daily_needs;
     }
 
+    public static int[] getClientNeed(int id) {
+        return client_daily_needs[id-1].getNutrition();
+    }
+
     //methords
     public void uploadInventory(String itemID, String name, String NUTRITION_CONTENT)
     {

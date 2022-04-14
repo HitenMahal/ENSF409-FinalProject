@@ -54,7 +54,7 @@ public class TestFoodItem {
         int[] expected = new int[]{0,100,0,0,624};
         int[] actual = testFood.getNutritionContent().getNutrition();
 
-        assertEquals("getNutritionContent did not return correct int[]", expected, actual);
+        assertArrayEquals("getNutritionContent did not return correct int[]", expected, actual);
     }
 
     @Test

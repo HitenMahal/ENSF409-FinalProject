@@ -7,6 +7,11 @@ public class NutritionContent {
     private final int PROTEIN;
     private final int OTHER;
     private final int CALORIES;
+
+    public NutritionContent(int[] nutritionValues) {
+        this(nutritionValues[0], nutritionValues[1], nutritionValues[2], nutritionValues[3], nutritionValues[4]);
+    }
+
     public NutritionContent(int wholeGrains, int fruitVeggies, int protein, int other, int calories){
         this.CALORIES = calories;
         this.FRUITVEGGIES = fruitVeggies;
