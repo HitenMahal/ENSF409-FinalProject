@@ -33,8 +33,8 @@ public class CalculateHamper{
                 hamper = compare;
             }
         }
-        if(calculateNutritionWaste(hamper)<0){
-            throw new IllegalArgumentException();
+        if(hamper == null||checkRequirementsMet(hamper)){
+            throw new InsufficientFoodException();
         }
         return hamper;
     }
