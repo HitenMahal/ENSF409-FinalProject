@@ -19,7 +19,6 @@ public class CalculateHamper{
         int[] theChosenOne = null;
         for(int[] c:combinations){
             FoodItem[] food = new FoodItem[c.length];
-            theChosenOne = c;
             for(int i = 0; i<c.length;i++){
                 food[i] = foods.get(c[i]);
             }
@@ -29,9 +28,11 @@ public class CalculateHamper{
             }
             if(hamper ==null){
                 hamper = new Hamper(food, clients);
+                theChosenOne = c;
                 continue;
             }
             if(calculateNutritionWaste(compare) <calculateNutritionWaste(hamper)){
+                theChosenOne = c;
                 hamper = compare;
             }
         }
