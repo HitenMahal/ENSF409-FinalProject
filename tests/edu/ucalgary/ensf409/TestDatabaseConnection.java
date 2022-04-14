@@ -6,6 +6,10 @@ public class TestDatabaseConnection {
     public static void main(String[] args) {
         Inventory.getInventory().clear();
         Inventory.downloadDatabase();
-        System.out.println(Inventory.getInventory().toArray().toString());
+        System.out.println(Inventory.getInventory().size());
+
+        Inventory.removeFromDatabase(1);
+        Inventory.downloadDatabase();
+        System.out.println(Inventory.getInventory().size());
     }
 }

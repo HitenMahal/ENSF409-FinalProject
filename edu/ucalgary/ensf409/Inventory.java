@@ -46,16 +46,14 @@ public class Inventory
         return client_daily_needs[id-1].getNutrition();
     }
 
-    //methords
-    public static void uploadInventory(String itemID, String name, String NUTRITION_CONTENT)
+    //methods
+    public static void removeFromDatabase(int itemID)
     {
         try {
-            String query = "INSERT INTO cats (itemID, name, NUTRITION_CONTENT) VALUES (?,?,?)"; //get the new values.
+            String query = "DELETE FROM available_food WHERE ItemID=?";
             PreparedStatement myStmt = dbConnect.prepareStatement(query);   //prepareStatment sents the query
             
-            myStmt.setString(1, itemID);
-            myStmt.setString(2, name);
-            myStmt.setString(3, NUTRITION_CONTENT);
+            myStmt.setInt(1, itemID);
             
             int rowCount = myStmt.executeUpdate();
             
@@ -77,18 +75,18 @@ public class Inventory
 
             while (results.next())
             {
-                int itemID = results.getInt("ItemID");
+                String itemID = results.getString("ItemID");
                 String Name = results.getString("Name");
                 int GrainContent = results.getInt("GrainContent");
                 int FVContent = results.getInt("FVContent");
                 int ProContent = results.getInt("ProContent");
                 int Other = results.getInt("Other");
                 int Calories = results.getInt("Calories");
-                FoodItem item = new FoodItem(itemID, Name, );
+                FoodItem item = new FoodItem(itemID, Name, new int[] {GrainContent, FVContent, ProContent, Other, Calories});
                 inventory.add(item);
             }
             myStmt.close();
-        } catch (SQLException e) {  //Trhwos a SQL exeption is something when't wrong with the SQL
+        } catch (SQLException e) {  //Throws a SQL exeption is something when't wrong with the SQL
             e.printStackTrace();
         }
     }
