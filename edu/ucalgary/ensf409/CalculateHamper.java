@@ -21,17 +21,16 @@ public class CalculateHamper{
             for(int i = 0; i<c.length;i++){
                 food[i] = foods.get(c[i]);
             }
+            Hamper compare = new Hamper(food, clients);
+            if(!checkRequirementsMet(compare)){
+                continue;
+            }
             if(hamper ==null){
                 hamper = new Hamper(food, clients);
-            }else{
-                if(!checkRequirementsMet(hamper)){
-                    Hamper compare = new Hamper(food, clients);
-                    if(checkRequirementsMet(compare)){hamper = compare;}
-                    else if(calculateNutritionWaste(compare) -calculateNutritionWaste(hamper) >0){hamper = compare;}
-                }else{
-                    Hamper compare = new Hamper(food, clients);
-                    if(calculateNutritionWaste(compare) -calculateNutritionWaste(hamper) >0){hamper = compare;}
-                }
+                continue;
+            }
+            if(calculateNutritionWaste(compare) <calculateNutritionWaste(hamper)){
+                hamper = compare;
             }
         }
         if(calculateNutritionWaste(hamper)<0){
@@ -75,7 +74,7 @@ public class CalculateHamper{
         int[] foods = hamper1.getNutritionContent().getNutrition();
         int[] needs = hamper1.getNutritionNeeded().getNutrition();
         for(int i = 0; i<5;i++){
-            if(foods[i]-needs[i]<0){
+            if(foods[i]<needs[i]){
                 return false;
             }
         }
@@ -83,12 +82,8 @@ public class CalculateHamper{
     }
 
     public static int calculateNutritionWaste(Hamper hamper){
-        int[] items = hamper.getNutritionContent().getNutrition();
-        int[] needed =hamper.getNutritionNeeded().getNutrition();
-        int waste = 0;
-        for(int i =0;i<5;i++){
-            waste += items[i]-needed[i];
-        }
-        return waste;
+        int items = hamper.getNutritionContent().getCalories();
+        int needed =hamper.getNutritionNeeded().getCalories();
+        return items-needed;
     }
 }
