@@ -7,8 +7,8 @@ import edu.ucalgary.ensf409.*;
 public class TestOrderForm {
     public String[][] request = { {"1"} };
 
-    @BeforeClass
-    public static void setupInventory() {
+    @Before
+    public void setupInventory() {
         FoodItem[] foods = new FoodItem[] {
             new FoodItem("1","Apple, dozen", new int[]{0,700,0,0,700}),     // ('Apple, dozen', 0, 100, 0, 0, 700),
             new FoodItem("2","Ham", new int[]{0,0,250,0,250}),              // ('Ham', 0, 0, 100, 0, 250),     

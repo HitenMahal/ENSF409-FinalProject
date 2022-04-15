@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 
 public class ClientGUI extends JFrame implements ActionListener, MouseListener{
 
-    private static int Hampers;
     private int NumberofClients; 
     private int TypeofClient1;
     private int TypeofClient2;
@@ -33,13 +32,15 @@ public class ClientGUI extends JFrame implements ActionListener, MouseListener{
     private JTextField TOCInput2;
     private JTextField TOCInput3;
     private JTextField TOCInput4;
+
+    private int hamperNumber;
    
     
-    public ClientGUI(){
+    public ClientGUI(int i){
         //super("Ordering Form");
-        Hampers = HamperGUI.getHampers();
-        for(int i = 1; i <= Hampers; i++){
         JFrame frame = new JFrame("Hamper " + i);
+
+        this.hamperNumber = i;
         
 
         instructions = new JLabel("Please enter the number of clients i.e 4. and Please enter the Type of Client 1,2,3 or 4");
@@ -121,10 +122,7 @@ public class ClientGUI extends JFrame implements ActionListener, MouseListener{
         frame.invalidate();
         frame.validate();
         frame.repaint();
-
-
     }
-}
     //String Hamper[][] = new REQUEST[Hampers][Order];
 
 
@@ -156,9 +154,9 @@ public class ClientGUI extends JFrame implements ActionListener, MouseListener{
 
             JOptionPane.showMessageDialog(this,"Number of Client 1's: " + ClientID1 + "\n"+ "Number of Client 2's: " 
             + ClientID2 + "\n" +"Number of Client 3's: " + ClientID3 +"\n"+ "Number of Client 4's: " + ClientID4);
-            
-            
-            
+
+            String[] Clients = {ClientID1, ClientID2, ClientID3, ClientID4};
+            HamperGUI.addHampers(Clients, hamperNumber);
         }
 
     }

@@ -17,6 +17,10 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
     private JLabel instructions;
     private JLabel HamperLabel;
     private JTextField HamperInput;
+    private int counter = 0;
+    private int counter2 = -1;
+    private static String[][] Hampers;
+    private static int hamperCounter = 0;
 
     public HamperGUI(){
         super("Hamper GUI");
@@ -40,6 +44,10 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         //Submit button
         JButton submitInfo = new JButton("Submit");
         submitInfo.addActionListener(this);
+        if (this != null)
+        {
+            counter = 1;
+        }
 
         //Instruction Panel 
         JPanel instructionPanel = new JPanel();
@@ -71,21 +79,26 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         NumberofHampers = Integer.parseInt(HamperInput.getText());
 
         //If the Input is valid goes to Client GUI and displays the number of Hampers reqeusted
-        if(validInput()){
+        if(validInput() && counter2 != 0){
             String Hampers = HamperNumber();
             JOptionPane.showMessageDialog(this, "Number of Hampers: " + Hampers);
-            new ClientGUI();
+            int numberOfHampers = getHampers();
+            for(int i = 1; i <= numberOfHampers; i++){
+                if (counter == 1)
+                {
+                    counter2 = numberOfHampers;
+                    counter = -1;
+                }
+                new ClientGUI(i);
+                counter2--;
+            }
             EventQueue.invokeLater(() -> {
                 //new ClientGUI().setVisible(true);
 
             });
-
-
         }
-
-        
-
     }
+
     //Mouse inputs 
     public void mouseClicked(MouseEvent event){
         
@@ -127,6 +140,24 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
     }
     public static int getHampers(){
         return NumberofHampers;
+    }
+
+    public static void addHampers(String[] hamper, int i)
+    {
+        Hampers = new String[hamperCounter + 1][4];
+        hamperCounter++;
+
+        for (int j = 0; j < Hampers[i - 1].length; j++)
+        {
+            System.out.println(i + "---" + j);
+            Hampers[i - 1][j] = hamper[j];
+            System.out.println(Hampers[i-1][j]);
+        }
+
+        if (Hampers.length == NumberofHampers)
+        {
+            //Order(Hampers);
+        }
     }
 
 

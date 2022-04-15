@@ -84,8 +84,8 @@ public class TestOrder
         );
 
 
+        // Order constructor will call createHampers()
         Order order = new Order(request);
-        order.createHampers();
 
         // The given inventory will be able to meet the needs of the one male adult exactly and so the following should be the nutrition of the hamper
         int[] expected =  {400,700,650,750,2500};

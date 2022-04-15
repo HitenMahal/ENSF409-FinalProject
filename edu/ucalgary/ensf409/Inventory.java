@@ -55,7 +55,7 @@ public class Inventory
             
             myStmt.setInt(1, itemID);
             
-            int rowCount = myStmt.executeUpdate();
+            myStmt.executeUpdate();
             
             myStmt.close();
 
