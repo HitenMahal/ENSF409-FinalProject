@@ -1,5 +1,6 @@
 package edu.ucalgary.ensf409;
 
+import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.*;
@@ -66,11 +67,15 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         HamperPanel.add(HamperLabel);
         HamperPanel.add(HamperInput);
 
+        // Changes color of the GUI
+        instructionPanel.setBackground(new Color(189, 245, 255));
+        HamperPanel.setBackground(new Color(189, 245, 255));
+        submitPanel.setBackground(new Color(189, 245, 255));
+
         //Layout of the Panels 
         this.add(instructionPanel, BorderLayout.NORTH);
         this.add(HamperPanel, BorderLayout.CENTER);
         this.add(submitPanel, BorderLayout.PAGE_END);
-
     }
 
     public void actionPerformed(ActionEvent event){
