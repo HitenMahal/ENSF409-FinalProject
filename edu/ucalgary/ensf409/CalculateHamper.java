@@ -9,6 +9,14 @@ public class CalculateHamper{
     private static Hamper hamper = null;
     private static Client clients[];
     private static int[] theChosenOne;
+    private HashMap<Integer,Boolean> tableSet = new HashMap<Integer,Boolean>();
+    private void HashFunctions(int[] arr){
+        String value ="";
+        for(int i=arr.length-1; i>=0 ;i++){
+            value += Integer.toString(arr[i]);
+        }
+
+    }
     public static Hamper calculateHamper(String[] order) throws InsufficientFoodException{
         
         tmp.clear();
@@ -26,7 +34,7 @@ public class CalculateHamper{
         // Create all possible combinations using the given FoodItems
         for(int i = 1;i<foods.size();i++){
             //TODO
-            combination(foods.size(),1, i);
+            combination(foods.size(), i);
             if(allAreOverShot && hamper !=null){
                 break;
             }
@@ -42,18 +50,36 @@ public class CalculateHamper{
         return hamper;
     }
     private static LinkedList<Integer> tmp = new LinkedList<Integer>();
-    private static void combination(int n, int left, int k){
-        System.out.println("Calculating another combination");
-        LinkedList<Integer> tmp2 = tmp;
-        if (k == 0) {
-            add(tmp);
+    public static void combination(int n, int r) {
+        List<int[]> combinations = new ArrayList<>();
+        int[] combination = new int[r];
+    
+        // initialize with lowest lexicographic combination
+        for (int i = 0; i < r; i++) {
+            combination[i] = i;
         }
-        for (int i = left; i <= n; ++i)
-        {
-            tmp.add(i);
-            combination(n, i + 1, k - 1);
-            tmp.remove(tmp.size() - 1);
+    
+        while (combination[r - 1] < n) {
+            Byte byteTotal =0b00000;
+            for(int i = 0;i<combination.length;i++){
+                int imm = combination[i];
+                byteTotal = (byte) (byteTotal|foods.get(i).getNutritionContent().getBytes());
+                combination[i] = imm ;
+            }
+            if(byteTotal ==0b11111){
+                compareHampers(combination);    
+            }
+             // generate next combination in lexicographic order
+            int t = r - 1;
+            while (t != 0 && combination[t] == n - r + t) {
+                t--;
+            }
+            combination[t]++;
+            for (int i = t + 1; i < r; i++) {
+                combination[i] = combination[i - 1] + 1;
+            }
         }
+    
     }
     private static void compareHampers(int[] c){
         FoodItem[] food = new FoodItem[c.length];
