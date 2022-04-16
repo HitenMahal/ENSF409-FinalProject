@@ -3,6 +3,7 @@ package edu.ucalgary.ensf409;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.concurrent.TimeUnit;
 
 
 public class HamperGUI extends JFrame implements ActionListener, MouseListener{
@@ -20,7 +21,8 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
 
     public HamperGUI(){
         super("Hamper GUI");
-        Inventory.downloadDatabase();
+        setupTestInventory();
+        // Inventory.downloadDatabase();
         setupHamper(); //Calls a method to allow for GUI to work
         setSize(600,200); //sizing of the GUI
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Default Close 
@@ -260,7 +262,12 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         try {
             //TODO
             System.out.println("Sending Order Request");
+
+            long start = System.nanoTime();
             createdOrder = new Order( prepareRequest(Request) );
+            long end = System.nanoTime();
+            System.out.printf("That took: %d ms.%n", TimeUnit.NANOSECONDS.toMillis(end - start));
+
             System.out.println("Getting OrderForm");
             reciept = OrderForm.getOrderForm(createdOrder);
         } catch (InsufficientFoodException e) {
@@ -305,6 +312,41 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
             outputRequest[i] = tmp;
         }
         return outputRequest;
+    }
+
+    public void setupTestInventory() {
+        // Setup Inventory for the test
+        FoodItem[] foods = new FoodItem[] {
+            new FoodItem("1","Apple, dozen", new int[]{0,700,0,0,700}),     // ('Apple, dozen', 0, 100, 0, 0, 700),
+            new FoodItem("2","Ham", new int[]{0,0,250,0,250}),              // ('Ham', 0, 0, 100, 0, 250),     
+            new FoodItem("3","Spam", new int[]{400,0,400,0,800}),           // ('Spam', 50, 0, 50, 0, 800),
+            new FoodItem("4","Eggs, dozen", new int[]{0,0,4,786,864}),      // ('Eggs, dozen', 0, 0, 9, 91, 864),
+            new FoodItem("5","Banana, bunch 5", new int[]{0,582,23,0,605}), // ('Banana, bunch 5', 0, 97, 3, 0, 605), 
+            new FoodItem("6","Mineral Water", new int[]{0,0,0,750,750}),    // ('Mineral Water', 0, 0, 0, 100, 750),
+            new FoodItem("7","Tuna", new int[]{0,0,100,0,100}),              // ('Tuna', 0, 0, 100, 0, 100),
+            new FoodItem("8","Mixed nuts, 1 kg", new int[]{0, 0, 23, 77, 6000}),
+            new FoodItem("9","Lentils, 1 kg", new int[]{63, 0, 25, 12, 3520}),
+            new FoodItem("10","Greek yogurt, plain, 1 kg", new int[]{0, 0, 9, 91, 970}),
+            new FoodItem("11","Tofu, 1 kg", new int[]{0, 0, 19, 81, 2700}),
+            new FoodItem("12","Mayonnaise, 1 kg", new int[]{0, 0, 0, 100, 6800}),
+            new FoodItem("13","Kidney beans, dozen cans", new int[]{25, 0, 9, 66, 6840}),
+            new FoodItem("14","Bacon, 1 kg", new int[]{0, 0, 14, 86, 3930}),
+            new FoodItem("15","Quinoa, 1 kg", new int[]{70, 0, 24, 6, 925}),
+            new FoodItem("16","Chocolate chip cookies, 500 g", new int[]{71, 0, 1, 29, 2440}),
+            new FoodItem("17","Boba green tea, 4 cans", new int[]{88, 0, 0, 12, 924}),
+        };
+        for (FoodItem food : foods) {
+            Inventory.addFoodItem(food);
+        }
+        // Setup Client Needs for the test
+        Inventory.setClientNeeds( 
+            new NutritionContent[] {
+                new NutritionContent( 400,700,650,750,2500 ),   // Adult Male
+                new NutritionContent( 320,560,520,600,2000 ),   // Adult Female
+                new NutritionContent( 462,726,682,330,2200 ),   // Child Over 8
+                new NutritionContent( 294,462,434,210,1400 )    // Child Under 8
+            }
+        );
     }
 
 //Mouse inputs 
