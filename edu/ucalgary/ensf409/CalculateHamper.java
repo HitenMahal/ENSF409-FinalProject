@@ -19,6 +19,7 @@ public class CalculateHamper{
         // Create all possible combinations using the given FoodItems
         
         for(int i = 1;i<foods.size();i++){
+            //TODO
             combination(foods.size(),1, i);
         }
 
@@ -53,6 +54,7 @@ public class CalculateHamper{
     private static LinkedList<Integer> tmp = new LinkedList<Integer>();
 
     private static void combination(int n, int left, int k){
+        System.out.println("Calculating another combination");
         if (k == 0) {
             add(tmp);
         }

@@ -9,18 +9,18 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
 
     // Important Global Variable States
     private static int NumberofHampers;
-    private static String[][] Hampers;
+    private static String[][] Request;
+    private static Order createdOrder;
     // Panels and Fields
     private JTextField HamperInput;
     private JPanel masterContainer;
     private CardLayout masterCardLayout = new CardLayout(0,0);
     // Class wide Counters
     private static int hamperCounter = 0;
-    private int counter = 0;
-    private int counter2 = -1;
 
     public HamperGUI(){
         super("Hamper GUI");
+        Inventory.downloadDatabase();
         setupHamper(); //Calls a method to allow for GUI to work
         setSize(600,200); //sizing of the GUI
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Default Close 
@@ -46,17 +46,13 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         NumberofHampers = Integer.parseInt(HamperInput.getText());
 
         //If the Input is valid goes to Client GUI and displays the number of Hampers reqeusted
-        if(validInput() && counter2 != 0){
-            String Hampers = HamperNumber();
-            JOptionPane.showMessageDialog(this, "Number of Hampers: " + Hampers);
-            int numberOfHampers = getHampers();
-            HamperGUI.Hampers = new String[numberOfHampers][];
-            for(int i = 1; i <= numberOfHampers; i++){
+        if(validHamperInput()){
+            JOptionPane.showMessageDialog(this, "Number of Hampers: " + NumberofHampers);
+            Request = new String[NumberofHampers][];
+            for(int i = 1; i <= NumberofHampers; i++){
                 createClientAsker(i);
             }
             masterCardLayout.next(masterContainer);
-            EventQueue.invokeLater(() -> {
-            });
         }        
     }
 
@@ -85,53 +81,53 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
                 }
             }
         }
-        for (String z : values) {
-            System.out.println(z);
+        JOptionPane.showMessageDialog(this,"<html>You inputted the following values:<br/>" 
+                                        + values[1] + " Adult Males,<br/>" 
+                                        + values[2] + " Adult Females,<br/>"
+                                        + values[3] + " Children Over 8,<br/>"
+                                        + values[4] + " Children Under 8<html/>");
+
+        if ( !validClientInput(values) ) {
+            JOptionPane.showMessageDialog(this,"Inputted value is invalid, please try again");
+            return;
         }
 
-        Hampers[hamperCounter] = values;
+        Request[hamperCounter] = values;
         hamperCounter++;
-        masterCardLayout.next(masterContainer);
-    }
-    
-    //Returns the Number of Hampers 
-    private String HamperNumber(){
-        String Hampers = new String(String.valueOf(NumberofHampers));
-
-        return Hampers;
+        System.out.println(hamperCounter);
+        if (hamperCounter == Request.length) {
+            System.out.println("Printing Reciept, Hampers="+hamperCounter);
+            createRecieptDisplay();
+        }
+        else {
+            masterCardLayout.next(masterContainer);
+        }
     }
 
     //Checks for Valid input
-    private boolean validInput(){
+    private boolean validHamperInput(){
         boolean allValidInput = true;
-
+        
         if(NumberofHampers <= 0 || NumberofHampers > 10){
             allValidInput = false;
             JOptionPane.showMessageDialog(this,NumberofHampers + "is an invalid input");
         }
-
         return allValidInput;
     }
-    public static int getHampers(){
-        return NumberofHampers;
-    }
 
-    public static void addHampers(String[] hamper, int i)
-    {
-        Hampers = new String[hamperCounter + 1][4];
-        hamperCounter++;
-
-        for (int j = 0; j < Hampers[i - 1].length; j++)
-        {
-            System.out.println(i + "---" + j);
-            Hampers[i - 1][j] = hamper[j];
-            System.out.println(Hampers[i-1][j]);
+    private boolean validClientInput(String[] values) {
+        boolean allValidInput = true;
+        for (String num : values) {
+            if (Integer.parseInt(num) < 0){
+                allValidInput = false;
+                return allValidInput;
+            };
         }
-
-        if (Hampers.length == NumberofHampers)
-        {
-            //Order(Hampers);
+        if (Integer.parseInt(values[0]) != Integer.parseInt(values[1]) + Integer.parseInt(values[2])
+            + Integer.parseInt(values[3]) + Integer.parseInt(values[4])) {
+                allValidInput = false;
         }
+        return allValidInput;
     }
 
     public void createHamperAsker() {
@@ -154,9 +150,6 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         // Submit Button
         JButton submitInfo = new JButton("Submit");
         submitInfo.addActionListener(this);
-        if (this != null) {
-            counter = 1;
-        }
         JPanel submitPanel = new JPanel();
         submitPanel.setLayout(new FlowLayout());
         submitPanel.add(submitInfo);
@@ -178,7 +171,8 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
     }
 
     public void createClientAsker(int i) {
-        JLabel instructions = new JLabel("HAMPER " + i + "\nPlease enter the number of clients i.e 4. and Please enter the Type of Client 1,2,3 or 4");
+        JLabel instructions = new JLabel("<html><h>HAMPER " + i + "<h><br/>"
+        + "Please enter the number of clients i.e 4. and Please enter the Type of Client 1,2,3 or 4<html>");
         //Number of clients 
         JLabel NOCLabel = new JLabel("Number of Clients");
        
@@ -259,11 +253,58 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
 
         ClientAsker.setName("Hamper" + i);
         masterContainer.add(ClientAsker);      
-        
-        // frame.invalidate();
-        // frame.validate();
-        // frame.repaint();
+    }
 
+    public void createRecieptDisplay() {
+        String reciept = "";
+        try {
+            //TODO
+            System.out.println("Sending Order Request");
+            createdOrder = new Order( prepareRequest(Request) );
+            System.out.println("Getting OrderForm");
+            reciept = OrderForm.getOrderForm(createdOrder);
+        } catch (InsufficientFoodException e) {
+            reciept = "InsufficientFoodException";
+        }
+
+        JLabel recieptText = new JLabel(reciept);
+        JPanel recieptPanel= new JPanel();
+        recieptPanel.add(recieptText);
+        JScrollPane recieptScroller = new JScrollPane(recieptPanel);
+        masterContainer.add(recieptScroller);
+        masterCardLayout.next(masterContainer);
+    }
+
+    public String[][] prepareRequest(String[][] request) {
+        String[][] outputRequest = new String[request.length][];
+        for (int i =0; i < request.length; i++) {
+            int total = Integer.parseInt(request[i][0]);
+            int type1 = Integer.parseInt(request[i][1]);
+            int type2 = Integer.parseInt(request[i][2]);
+            int type3 = Integer.parseInt(request[i][3]);
+            int type4 = Integer.parseInt(request[i][4]);
+            String[] tmp = new String[total];
+            int counter = 0;
+            int j = 0;
+            for (j=0; j < type1; j++) {
+                tmp[counter] = "1";
+                counter++;
+            }
+            for (j=0; j < type2; j++) {
+                tmp[counter] = "2";
+                counter++;
+            }
+            for (j=0; j < type3; j++) {
+                tmp[counter] = "3";
+                counter++;
+            }
+            for (j=0; j < type4; j++) {
+                tmp[counter] = "4";
+                counter++;
+            }
+            outputRequest[i] = tmp;
+        }
+        return outputRequest;
     }
 
 //Mouse inputs 

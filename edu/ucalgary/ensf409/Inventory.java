@@ -82,9 +82,25 @@ public class Inventory
                 int ProContent = results.getInt("ProContent");
                 int Other = results.getInt("Other");
                 int Calories = results.getInt("Calories");
-                FoodItem item = new FoodItem(itemID, Name, new int[] {GrainContent, FVContent, ProContent, Other, Calories});
+                FoodItem item = new FoodItem(itemID, Name, new int[] {GrainContent*Calories/100, FVContent*Calories/100, ProContent*Calories/100, Other*Calories/100, Calories});
                 inventory.add(item);
             }
+
+            // Get Client Needs
+            results = myStmt.executeQuery("SELECT * FROM daily_client_needs");
+            NutritionContent[] needs = new NutritionContent[4];
+            int i = 0;
+            while (results.next()) {
+                int WholeGrains = results.getInt("WholeGrains");
+                int FruitVeggies = results.getInt("FruitVeggies");
+                int Protein = results.getInt("Protein");
+                int Other = results.getInt("Other");
+                int Calories = results.getInt("Calories");
+                needs[i] = new NutritionContent(WholeGrains*Calories/100, FruitVeggies*Calories/100, Protein*Calories/100, Other*Calories/100, Calories);
+                i++;
+            }
+            client_daily_needs = needs;
+
             myStmt.close();
         } catch (SQLException e) {  //Throws a SQL exeption is something when't wrong with the SQL
             e.printStackTrace();
