@@ -4,6 +4,7 @@ import org.junit.*;
 import edu.ucalgary.ensf409.*;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
+import org.junit.Test;
 
 public class TestInventory {
     /**

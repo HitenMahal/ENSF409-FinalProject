@@ -3,6 +3,7 @@ package tests.edu.ucalgary.ensf409;
 import edu.ucalgary.ensf409.*;
 import static org.junit.Assert.*;
 import org.junit.*;
+import org.junit.Test;
 
 /**
  * Tests all Hamper methods as well as FormatMethods methods
