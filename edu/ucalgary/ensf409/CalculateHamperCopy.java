@@ -2,37 +2,60 @@ package edu.ucalgary.ensf409;
 
 import java.util.*;
 
-public class CalculateHamper{
+public class CalculateHamperCopy{
     private static LinkedList<int[]> combinations = new LinkedList<int[]>();
     private static boolean allAreOverShot =false;
     private static ArrayList<FoodItem> foods;
     private static Hamper hamper = null;
-    private static Client clients[];
-    private static int[] theChosenOne;
+
     public static Hamper calculateHamper(String[] order) throws InsufficientFoodException{
-        
+        combinations.clear();
         tmp.clear();
+        allAreOverShot = false;
         foods = Inventory.getInventory();
-        combinations.clear();;
-        allAreOverShot =false;
-        hamper = null;
-        theChosenOne = null;
         // Get a copy of the Inventory
         // Create a Client array containing the people the hamper will need to serve
-        clients = new Client[order.length];
+        Client clients[] = new Client[order.length];
         for(int i = 0; i<order.length; i++){
             clients[i] = new Client( Integer.parseInt(order[i]) );
         }
         // Create all possible combinations using the given FoodItems
+        
         for(int i = 1;i<foods.size();i++){
             //TODO
             combination(foods.size(),1, i);
-            if(allAreOverShot && hamper !=null){
-                break;
-            }
-            allAreOverShot = true;
         }
-        
+
+        int[] theChosenOne = null;
+        int currentLength = 0;
+        for(int[] c:combinations){
+            if(c.length != currentLength){
+                if(allAreOverShot && hamper !=null){
+                    break;
+                }
+                allAreOverShot = true;
+                currentLength = c.length;
+            }
+            FoodItem[] food = new FoodItem[c.length];
+            for(int i = 0; i<c.length;i++){
+                food[i] = foods.get(c[i]);
+            }
+            Hamper compare = new Hamper(food, clients);
+            boolean check= checkRequirementsMet(compare);
+            if(!check){
+                continue;
+            }
+            if(hamper ==null){
+                hamper = new Hamper(food, clients);
+                theChosenOne = c;
+                continue;
+            }
+
+            if(calculateNutritionWaste(compare) < calculateNutritionWaste(hamper)){
+                theChosenOne = c;
+                hamper = compare;
+            }
+        }
         if(hamper == null || !checkRequirementsMet(hamper)){
             throw new InsufficientFoodException();
         }
@@ -55,28 +78,7 @@ public class CalculateHamper{
             tmp.remove(tmp.size() - 1);
         }
     }
-    private static void compareHampers(int[] c){
-        FoodItem[] food = new FoodItem[c.length];
-        for(int i = 0; i<c.length;i++){
-            food[i] = foods.get(c[i]);
-        }
-        Hamper compare = new Hamper(food, clients);
-        boolean check= checkRequirementsMet(compare);
-        if(!check){
-            return;
-        }
-        if(hamper ==null){
-            hamper = new Hamper(food, clients);
-            theChosenOne = c;
-            return;
-        }
-
-        if(calculateNutritionWaste(compare) < calculateNutritionWaste(hamper)){
-            theChosenOne = c;
-            hamper = compare;
-        }
-        
-    }
+    
     private static void add(LinkedList<Integer> tmp2) {
         Byte byteTotal =0b00000;
         int[]arr = new int[tmp2.size()];
@@ -88,7 +90,7 @@ public class CalculateHamper{
         if(byteTotal !=0b11111){
             return;
         }
-        compareHampers(arr);
+        combinations.add(arr);
     }
 
     public static int[] calculateHamperNutrition(Hamper hamper){

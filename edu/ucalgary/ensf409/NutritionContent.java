@@ -7,7 +7,7 @@ public class NutritionContent {
     private final int PROTEIN;
     private final int OTHER;
     private final int CALORIES;
-
+    private Byte bytes = 0b00000;
     public NutritionContent(int[] nutritionValues) {
         this(nutritionValues[0], nutritionValues[1], nutritionValues[2], nutritionValues[3], nutritionValues[4]);
     }
@@ -18,6 +18,22 @@ public class NutritionContent {
         this.PROTEIN = protein;
         this.OTHER = other;
         this.WHOLEGRAINS = wholeGrains;
+        if(wholeGrains > 0){
+            bytes = (byte) (bytes | 0b00001);
+        }
+        if(fruitVeggies > 0){
+            bytes = (byte) (bytes | 0b00010);
+        }
+        if(protein > 0){
+            bytes = (byte) (bytes | 0b00100);
+        }
+        if(other > 0){
+            bytes = (byte) (bytes | 0b01000);
+        }
+        if(calories > 0){
+            bytes = (byte) (bytes | 0b10000);
+        }
+
     }
     public int[] getNutrition(){
         int nutrition[] = {getGrains(), getFruitVeggies(), getProtein(), getOther(), getCalories()};
@@ -37,5 +53,8 @@ public class NutritionContent {
     }
     public int getCalories(){
         return this.CALORIES;
+    }
+    public Byte getBytes(){
+        return this.bytes;
     }
 }
