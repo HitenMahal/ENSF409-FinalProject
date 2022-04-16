@@ -8,8 +8,6 @@ public class TestDatabaseConnection {
         Inventory.downloadDatabase();
         System.out.println(Inventory.getInventory().size());
 
-        Inventory.removeFromDatabase(1);
-        Inventory.downloadDatabase();
-        System.out.println(Inventory.getInventory().size());
+        for (int x : Inventory.getClientNeed(1)){ System.out.println(x);}
     }
 }

@@ -6,16 +6,23 @@ public class CalculateHamper{
     private static LinkedList<int[]> combinations = new LinkedList<int[]>();
 
     public static Hamper calculateHamper(String[] order) throws InsufficientFoodException{
-        LinkedList<int[]> needs = combinations;
+        combinations.clear();
+        tmp.clear();
+        // Get a copy of the Inventory
         ArrayList<FoodItem> foods = Inventory.getInventory();
+        // Create a Client array containing the people the hamper will need to serve
         Client clients[] = new Client[order.length];
         for(int i = 0; i<order.length; i++){
             clients[i] = new Client( Integer.parseInt(order[i]) );
         }
         Hamper hamper = null;
+        // Create all possible combinations using the given FoodItems
+        
         for(int i = 1;i<foods.size();i++){
+            //TODO
             combination(foods.size(),1, i);
         }
+
         int[] theChosenOne = null;
         for(int[] c:combinations){
             FoodItem[] food = new FoodItem[c.length];
@@ -31,7 +38,7 @@ public class CalculateHamper{
                 theChosenOne = c;
                 continue;
             }
-            if(calculateNutritionWaste(compare) <calculateNutritionWaste(hamper)){
+            if(calculateNutritionWaste(compare) < calculateNutritionWaste(hamper)){
                 theChosenOne = c;
                 hamper = compare;
             }
@@ -47,7 +54,7 @@ public class CalculateHamper{
     private static LinkedList<Integer> tmp = new LinkedList<Integer>();
 
     private static void combination(int n, int left, int k){
-        LinkedList<int[]> needs = combinations;
+        System.out.println("Calculating another combination");
         if (k == 0) {
             add(tmp);
         }
