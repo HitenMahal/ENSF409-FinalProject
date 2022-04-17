@@ -3,7 +3,6 @@ package tests.edu.ucalgary.ensf409;
 import edu.ucalgary.ensf409.*;
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.junit.Test;
 
 //Nutrition class, Nutrition Content, Insufficent Food Exception 
 public class TestNutrition{
