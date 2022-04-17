@@ -334,6 +334,10 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
             new FoodItem("15","Quinoa, 1 kg", new int[]{70, 0, 24, 6, 925}),
             new FoodItem("16","Chocolate chip cookies, 500 g", new int[]{71, 0, 1, 29, 2440}),
             new FoodItem("17","Boba green tea, 4 cans", new int[]{88, 0, 0, 12, 924}),
+            new FoodItem("18","Apple, dozen", new int[]{0,700,0,0,700}),     // ('Apple, dozen', 0, 100, 0, 0, 700),
+            new FoodItem("19","Ham", new int[]{0,0,250,0,250}),              // ('Ham', 0, 0, 100, 0, 250),     
+            new FoodItem("20","Spam", new int[]{400,0,400,0,800}),           // ('Spam', 50, 0, 50, 0, 800),
+
         };
         for (FoodItem food : foods) {
             Inventory.addFoodItem(food);
