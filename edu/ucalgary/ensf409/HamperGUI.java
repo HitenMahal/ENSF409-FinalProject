@@ -5,7 +5,11 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.concurrent.TimeUnit;
 
-
+/**
+ * HamperGUI Object represents the GUI popup for the user to interact with. The user can add how many hampers they need
+ * how many people are using each hamper, and what food each hamper contains
+ * Request contains all the food the used Requested
+ */
 public class HamperGUI extends JFrame implements ActionListener, MouseListener{
 
     // Important Global Variable States
@@ -19,6 +23,9 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
     // Class wide Counters
     private static int hamperCounter = 0;
 
+    /**
+     * Creates the GUI window
+     */
     public HamperGUI(){
         super("Hamper GUI");
         setupTestInventory();
@@ -28,12 +35,18 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Default Close 
     }
 
+    /**
+     * This creates a hamper GUI panel for the user to interact with 
+     */
     public void setupHamper(){
         masterContainer = new JPanel(masterCardLayout);
         this.add(masterContainer);
         createHamperAsker();
     }
 
+    /**
+     * This preforms the action based on the button pressed 
+     */
     public void actionPerformed(ActionEvent event){
         if (event.getActionCommand().equals("Submit")) {
             handleHamperNumber();
@@ -62,6 +75,10 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         }
     }
 
+    /**
+     * handleHamperNumber creates the number of hampers that the user inputs and makes the user
+     * go through each hamper before showing the next one
+     */
     public void handleHamperNumber() {
         //Gets the input 
         NumberofHampers = Integer.parseInt(HamperInput.getText());
@@ -77,6 +94,9 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         }        
     }
 
+    /**
+     * HandleClientNumber creates the hampers and takes in how many Clients are using it and displays it to the user
+     */
     public void handleClientNumber() {
         JPanel currPanel = null;
         Component[] panels = masterContainer.getComponents();
@@ -136,6 +156,11 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         return allValidInput;
     }
 
+    /**
+     * validClientInput checks if the values inputted by the user are valid values 
+     * @param values are the values that the user inputted
+     * @return  True if all the inputs are valid and false if one or more of the values are invalid
+     */
     private boolean validClientInput(String[] values) {
         boolean allValidInput = true;
         for (String num : values) {
@@ -151,6 +176,9 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         return allValidInput;
     }
 
+    /**
+     * Creates the inital GUI that asks the user for how many hampers they want
+     */
     public void createHamperAsker() {
         //Instructions for GUI
         JLabel instructions = new JLabel("Enter desired amount of Hampers");
@@ -191,6 +219,11 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         masterContainer.add(HamperAsker);        
     }
 
+    /**
+     * createClientAsker creates a GUI based on number of hampers, asks the user how many clients are using the hamper,
+     * and the type of Clients ("Adult Male", "Adult Female", "Child under 8", "Child over")
+     * @param i represents which hamper is being set
+     */
     public void createClientAsker(int i) {
         JLabel instructions = new JLabel("<html><h>HAMPER " + i + "<h><br/>"
         + "Please enter the number of clients i.e 4. and Please enter the Type of Client 1,2,3 or 4<html>");
@@ -276,6 +309,9 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         masterContainer.add(ClientAsker);      
     }
 
+    /**
+     * createRecieptDisplay prints out to the terminal the reciept for the user to see
+     */
     public void createRecieptDisplay() {
         String reciept = "";
         try {
@@ -314,6 +350,11 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         setSize(600,500);
     }
 
+    /**
+     * prepareRequest stores all the clients in each hamper created
+     * @param request   contains all the Clients in each hamper
+     * @return  all the clients from each hamper and the type of Client
+     */
     public String[][] prepareRequest(String[][] request) {
         String[][] outputRequest = new String[request.length][];
         for (int i =0; i < request.length; i++) {
@@ -369,14 +410,14 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
             new FoodItem("18","Kidney beans, 1 pound", new int[]{72, 0, 28, 0, 385}),
             new FoodItem("19","Beets, 1 pound", new int[]{0, 87, 13, 0, 193}),
             new FoodItem("20","Chickpeas, 1 kg", new int[]{67, 0, 22, 11, 1640}),
-            new FoodItem("21","Hummus", new int[]{24, 0, 11, 65, 450}),
-            new FoodItem("22","Beets, 1 pound", new int[]{0, 87, 13, 0, 193}),
-            new FoodItem("23","Carrots", new int[]{0, 100, 0, 0, 264}),
-            new FoodItem("24","Wheaties, family size", new int[]{92, 0, 8, 0, 8000}),
-            new FoodItem("25","Whole wheat flour, 10 kg", new int[]{72, 0, 12, 16, 3660}),
-            new FoodItem("26","Eggs, 1 kg", new int[]{2, 0, 36, 62, 1430}),
-            new FoodItem("27","Avocado, 1 pound", new int[]{19, 76, 5, 0, 725}),
-            new FoodItem("28","Black olives, large tin", new int[]{23, 0, 0, 77, 2200}),
+            // new FoodItem("21","Hummus", new int[]{24, 0, 11, 65, 450}),
+            // new FoodItem("22","Beets, 1 pound", new int[]{0, 87, 13, 0, 193}),
+            // new FoodItem("23","Carrots", new int[]{0, 100, 0, 0, 264}),
+            // new FoodItem("24","Wheaties, family size", new int[]{92, 0, 8, 0, 8000}),
+            // new FoodItem("25","Whole wheat flour, 10 kg", new int[]{72, 0, 12, 16, 3660}),
+            // new FoodItem("26","Eggs, 1 kg", new int[]{2, 0, 36, 62, 1430}),
+            // new FoodItem("27","Avocado, 1 pound", new int[]{19, 76, 5, 0, 725}),
+            // new FoodItem("28","Black olives, large tin", new int[]{23, 0, 0, 77, 2200}),
         };
         for (FoodItem food : foods) {
             Inventory.addFoodItem(food);

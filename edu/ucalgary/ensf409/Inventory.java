@@ -3,6 +3,9 @@ package edu.ucalgary.ensf409;
 import java.util.*;
 import java.sql.*;
 
+/**
+ * Inventory creates a array of food from the data base and updates/removes food from the database when used in hampers
+ */
 public class Inventory 
 {
     private static String database_URL;
@@ -11,42 +14,71 @@ public class Inventory
     private static Connection dbConnect;
     private static ResultSet results;
     
+    /**
+     * empty constructor
+     */
     public Inventory()
     {
     }
 
-    //Setters
+    /**
+     * setter for database URL
+     * @param dbURL is the database URL 
+     */
     public static void setDatabaseURL(String dbURL)
     {
         database_URL = dbURL;
     }
 
+    /**
+     * Setter for the Client needs (Nutritional needs)
+     * @param needs is the nurtitional needs of the CLients
+     */
     public static void setClientNeeds(NutritionContent[] needs)
     {
         client_daily_needs = needs;
     }
 
-    //getters
+    /**
+     * getter for Database URL
+     * @return the database URL
+     */
     public static String getDatabaseURL()
     {
         return database_URL;
     }
 
+    /**
+     * getter for the food inside the inventory
+     * @return the current inventory
+     */
     public static ArrayList <FoodItem> getInventory()
     {
         return inventory;
     }
 
+    /**
+     * getter for all CLients needs 
+     * @return  all Clients daily nutritional needs
+     */
     public static NutritionContent[] getClientNeeds()
     {
         return client_daily_needs;
     }
 
+    /**
+     * getter for a specific Client nutritional needs
+     * @param id    represents the type of client
+     * @return  the clients nutritional needs
+     */
     public static int[] getClientNeed(int id) {
         return client_daily_needs[id-1].getNutrition();
     }
 
-    //methods
+    /**
+     * removeFromDatabase removes the item that is used by a hamper from the database that contains all the foods in the inventory 
+     * @param itemID    represents which food is used
+     */
     public static void removeFromDatabase(int itemID)
     {
         try {
@@ -64,6 +96,9 @@ public class Inventory
         }
     }
 
+    /**
+     * downloadDatabase gets all the food from the database and sets it to the inventory 
+     */
     public static void downloadDatabase()
     {
         inventory.clear(); //Clear inventory to make sure the downloaded inventory is all we have
@@ -107,11 +142,19 @@ public class Inventory
         }
     }
 
+    /**
+     * addFoodItem adds a food item to the inventory
+     * @param toBeAdded is the food item added
+     */
     public static void addFoodItem(FoodItem toBeAdded)
     {
         inventory.add(toBeAdded);
     }
 
+    /**
+     * deleteFoodItem removes a food item from the inventory
+     * @param toBeRemoved   is the food item removed
+     */
     public static void deleteFoodItem(FoodItem toBeRemoved)
     {
         inventory.remove(toBeRemoved);
