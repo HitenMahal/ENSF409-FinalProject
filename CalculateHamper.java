@@ -1,3 +1,4 @@
+/*
 package edu.ucalgary.ensf409;
 
 import java.util.*;
@@ -26,7 +27,7 @@ public class CalculateHamper{
         // Create all possible combinations using the given FoodItems
         for(int i = 1;i<foods.size();i++){
             //TODO
-            combination(foods.size(), i);
+            combination(foods.size(),1, i);
             if(allAreOverShot && hamper !=null){
                 break;
             }
@@ -42,10 +43,23 @@ public class CalculateHamper{
         return hamper;
     }
     private static LinkedList<Integer> tmp = new LinkedList<Integer>();
-
     private static void combination(int n, int left, int k){
+        System.out.println("Calculating another combination");
+        LinkedList<Integer> tmp2 = tmp;
         if (k == 0) {
             add(tmp);
+        }
+        for (int i = left; i <= n; ++i)
+        {
+            tmp.add(i);
+            combination(n, i + 1, k - 1);
+            tmp.remove(tmp.size() - 1);
+        }
+    }
+    private static void compareHampers(int[] c){
+        FoodItem[] food = new FoodItem[c.length];
+        for(int i = 0; i<c.length;i++){
+            food[i] = foods.get(c[i]);
         }
         Hamper compare = new Hamper(food, clients);
         boolean check= checkRequirementsMet(compare);
@@ -105,3 +119,4 @@ public class CalculateHamper{
         return items-needed;
     }
 }
+*/
