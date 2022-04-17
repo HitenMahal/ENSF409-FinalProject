@@ -67,7 +67,9 @@ public class CalculateHamper{
         }
         for(FoodItem food : hamper.getContents()){
             Inventory.deleteFoodItem(food);
-            Inventory.removeFromDatabase(Integer.parseInt(food.getItemID()));
+            try {
+                Inventory.removeFromDatabase(Integer.parseInt(food.getItemID()));
+            } catch (Exception e) {};
         }
         return hamper;
     }
