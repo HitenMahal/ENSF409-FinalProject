@@ -31,7 +31,7 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         // setupTestInventory();
         Inventory.downloadDatabase();
         setupHamper(); //Calls a method to allow for GUI to work
-        setSize(600,200); //sizing of the GUI
+        setSize(800,200); //sizing of the GUI
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Default Close 
     }
 
@@ -65,7 +65,7 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
             createdOrder = null;
             hamperCounter = 0;
             masterCardLayout.next(masterContainer);
-            setSize(600,200);
+            setSize(800,200);
             for (Component panel : masterContainer.getComponents()) {
                 if (panel.getName() == "HamperAsker") {
                     continue;
@@ -231,10 +231,10 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         JLabel NOCLabel = new JLabel("Number of Clients");
        
         //Type of Client
-        JLabel TOCLabel1 = new JLabel("Client 1's: ");
-        JLabel TOCLabel2 = new JLabel("Client 2's: ");
-        JLabel TOCLabel3 = new JLabel("Client 3's: ");
-        JLabel TOCLabel4 = new JLabel("Client 4's: ");
+        JLabel TOCLabel1 = new JLabel("# of Adult Males: ");
+        JLabel TOCLabel2 = new JLabel("# of Adult Females: ");
+        JLabel TOCLabel3 = new JLabel("# of Children Over 8: ");
+        JLabel TOCLabel4 = new JLabel("# of Children Under 8:");
         
 
         //Input for the Type of Clients 
