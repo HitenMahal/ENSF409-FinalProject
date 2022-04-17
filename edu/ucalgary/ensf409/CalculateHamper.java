@@ -65,8 +65,9 @@ public class CalculateHamper{
             }
             throw new InsufficientFoodException(errorMessage);
         }
-        for(int i=0; i<theChosenOne.length;i++){
-            Inventory.deleteFoodItem(foods.get(i));
+        for(FoodItem food : hamper.getContents()){
+            Inventory.deleteFoodItem(food);
+            Inventory.removeFromDatabase(Integer.parseInt(food.getItemID()));
         }
         return hamper;
     }
@@ -154,10 +155,10 @@ public class CalculateHamper{
         return n;
     }
     private static boolean checkRequirementsMet(Hamper hamper1){
-        int[] foods = hamper1.getNutritionContent().getNutrition();
+        int[] have = hamper1.getNutritionContent().getNutrition();
         int[] needs = hamper1.getNutritionNeeded().getNutrition();
         for(int i = 0; i<5;i++){
-            if(foods[i]<needs[i]){
+            if(have[i]<needs[i]){
                 allAreOverShot = false;
                 return false;
             }

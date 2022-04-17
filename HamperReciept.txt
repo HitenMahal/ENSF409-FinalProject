@@ -4,34 +4,38 @@ Hamper Order Form
 Name:
 Date:
 
-Hamper 1: Adult Male
-Hamper 2: Adult Female, Child Under 8
+Hamper 1: Adult Male, Child Under 8
+Hamper 2: Adult Female
 
 Hamper 1 Items:
-1	Mineral Water
 2	Ham
 3	Tuna
 4	Apple, dozen
+5	Granola Bar, box
+12	Pasta, dry, pound
+14	Instant ramen, package 20
+15	Frozen pizza, pepperoni
+16	Banana, bunch 5
 
 Total nutrition required:
-Grains Needed: 400, Fruit and Veggies Needed: 700, Protein Needed: 650, Other Needed: 750, Calories Total Needed: 2500
+Grains Needed: 694, Fruit and Veggies Needed: 1162, Protein Needed: 1084, Other Needed: 960, Calories Total Needed: 3900
 
 Total nutrition in hamper:
-Grains: 400, Fruit and Veggies: 700, Protein: 650, Other: 750, Calories Total: 2500
-Total Nutrition Wasted: 0 Calories
+Grains: 720, Fruit and Veggies: 1169, Protein: 1084, Other: 977, Calories Total: 3950
+Total Nutrition Wasted: 50 Calories
 
 Hamper 1 Items:
+1	Mineral Water
 6	Chicken broth, can
+7	Wheat bread, loaf
 8	Tomato Sauce, jar
-15	Frozen pizza, pepperoni
-18	Black olives, large tin
-20	Avocado, 1 pound
+9	Orange, dozen
 
 Total nutrition required:
-Grains Needed: 614, Fruit and Veggies Needed: 1022, Protein Needed: 954, Other Needed: 810, Calories Total Needed: 3400
+Grains Needed: 320, Fruit and Veggies Needed: 560, Protein Needed: 520, Other Needed: 600, Calories Total Needed: 2000
 
 Total nutrition in hamper:
-Grains: 643, Fruit and Veggies: 1071, Protein: 990, Other: 1814, Calories Total: 4519
-Total Nutrition Wasted: 1119 Calories
+Grains: 462, Fruit and Veggies: 640, Protein: 520, Other: 1050, Calories Total: 2672
+Total Nutrition Wasted: 672 Calories
 
 
