@@ -3,7 +3,6 @@ package tests.edu.ucalgary.ensf409;
 import static org.junit.Assert.assertTrue;
 import org.junit.*;
 import edu.ucalgary.ensf409.*;
-import org.junit.Test;
 
 public class TestOrderForm {
     public String[][] request = { {"1"} };

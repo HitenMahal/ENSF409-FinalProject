@@ -8,7 +8,6 @@ public class FoodItem implements FormatMethods{
     private final String NAME;
     private final NutritionContent NUTRITION_CONTENT;
 
-
     /**
      * FoodItem Constructor
      * @param itemID ID of the item as stored in the SQL database
