@@ -1,5 +1,4 @@
 package edu.ucalgary.ensf409;
-import java.util.HashMap;
 /**
  * Hamper object represents the food that is needed for a house hold, group of people, and more then one hamper may be used in one house hold  
  * NUTRITION_NEEDED is the amount of protein, calories, vitamins, etc. needed per Client 

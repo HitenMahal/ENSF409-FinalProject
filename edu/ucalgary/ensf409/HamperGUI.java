@@ -28,8 +28,8 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
      */
     public HamperGUI(){
         super("Hamper GUI");
-        setupTestInventory();
-        // Inventory.downloadDatabase();
+        // setupTestInventory();
+        Inventory.downloadDatabase();
         setupHamper(); //Calls a method to allow for GUI to work
         setSize(600,200); //sizing of the GUI
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Default Close 
@@ -315,7 +315,6 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
     public void createRecieptDisplay() {
         String reciept = "";
         try {
-            //TODO
             System.out.println("Sending Order Request");
 
             long start = System.nanoTime();
@@ -326,7 +325,7 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
             System.out.println("Getting OrderForm");
             reciept = OrderForm.getOrderForm(createdOrder);
         } catch (InsufficientFoodException e) {
-            reciept = "InsufficientFoodException";
+            reciept = e.getMessage();
         }
 
         JButton printButton = new JButton("Print");
@@ -347,7 +346,7 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         JScrollPane recieptScroller = new JScrollPane(recieptPanel);
         masterContainer.add(recieptScroller);
         masterCardLayout.next(masterContainer);
-        setSize(600,500);
+        setSize(1000,500);
     }
 
     /**
@@ -409,15 +408,7 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
             new FoodItem("17","Boba green tea, 4 cans", new int[]{88, 0, 0, 12, 924}),
             new FoodItem("18","Kidney beans, 1 pound", new int[]{72, 0, 28, 0, 385}),
             new FoodItem("19","Beets, 1 pound", new int[]{0, 87, 13, 0, 193}),
-            new FoodItem("20","Chickpeas, 1 kg", new int[]{67, 0, 22, 11, 1640}),
-            // new FoodItem("21","Hummus", new int[]{24, 0, 11, 65, 450}),
-            // new FoodItem("22","Beets, 1 pound", new int[]{0, 87, 13, 0, 193}),
-            // new FoodItem("23","Carrots", new int[]{0, 100, 0, 0, 264}),
-            // new FoodItem("24","Wheaties, family size", new int[]{92, 0, 8, 0, 8000}),
-            // new FoodItem("25","Whole wheat flour, 10 kg", new int[]{72, 0, 12, 16, 3660}),
-            // new FoodItem("26","Eggs, 1 kg", new int[]{2, 0, 36, 62, 1430}),
-            // new FoodItem("27","Avocado, 1 pound", new int[]{19, 76, 5, 0, 725}),
-            // new FoodItem("28","Black olives, large tin", new int[]{23, 0, 0, 77, 2200}),
+            new FoodItem("20","Chickpeas, 1 kg", new int[]{300, 462, 434, 230, 1426}),
         };
         for (FoodItem food : foods) {
             Inventory.addFoodItem(food);

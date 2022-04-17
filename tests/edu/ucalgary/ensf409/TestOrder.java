@@ -70,6 +70,7 @@ public class TestOrder
             new FoodItem("6","Mineral Water", new int[]{0,0,0,750,750}),    // ('Mineral Water', 0, 0, 0, 100, 750),
             new FoodItem("7","Tuna", new int[]{0,0,100,0,100})              // ('Tuna', 0, 0, 100, 0, 100),
         };
+        Inventory.getInventory().clear();
         for (FoodItem food : foods) {
             Inventory.addFoodItem(food);
         }

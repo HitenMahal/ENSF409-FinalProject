@@ -24,14 +24,29 @@ public class OrderForm {
         }
 
         i = 1;
+        output += "\n";
         for (Hamper hamper : order.getHampers()) {
             output += "Hamper " + i + " Items:\n";
             for (FoodItem food : hamper.getContents()) {
                 output += food.getFormattedDetailsForUser() + "\n";
             }
             output += "\n";
-        }
+            output += "Total nutrition required:\n" 
+                + "Grains Needed: " + hamper.getNutritionNeeded().getGrains() + ", "
+                + "Fruit and Veggies Needed: " + hamper.getNutritionNeeded().getFruitVeggies() + ", "
+                + "Protein Needed: " + hamper.getNutritionNeeded().getProtein() + ", "
+                + "Other Needed: " + hamper.getNutritionNeeded().getOther() + ", "
+                + "Calories Total Needed: " + hamper.getNutritionNeeded().getCalories() + "\n\n";
 
+            output += "Total nutrition in hamper:\n" 
+                + "Grains: " + hamper.getNutritionContent().getGrains() + ", "
+                + "Fruit and Veggies: " + hamper.getNutritionContent().getFruitVeggies() + ", "
+                + "Protein: " + hamper.getNutritionContent().getProtein() + ", "
+                + "Other: " + hamper.getNutritionContent().getOther() + ", "
+                + "Calories Total: " + hamper.getNutritionContent().getCalories() + "\n";
+
+            output += "Total Nutrition Wasted: " + CalculateHamper.calculateNutritionWaste(hamper) + " Calories\n\n";
+        }
         return output;
     }
 
