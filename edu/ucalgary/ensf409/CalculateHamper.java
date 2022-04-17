@@ -54,7 +54,6 @@ public class CalculateHamper{
     private static LinkedList<Integer> tmp = new LinkedList<Integer>();
 
     private static void combination(int n, int left, int k){
-        System.out.println("Calculating another combination");
         if (k == 0) {
             add(tmp);
         }
