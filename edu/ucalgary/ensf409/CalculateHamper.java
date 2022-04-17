@@ -42,41 +42,10 @@ public class CalculateHamper{
         return hamper;
     }
     private static LinkedList<Integer> tmp = new LinkedList<Integer>();
-    public static void combination(int n, int r) {
-        List<int[]> combinations = new ArrayList<>();
-        int[] combination = new int[r];
-    
-        // initialize with lowest lexicographic combination
-        for (int i = 0; i < r; i++) {
-            combination[i] = i;
-        }
-    
-        while (combination[r - 1] < n) {
-            Byte byteTotal =0b00000;
-            for(int i = 0;i<combination.length;i++){
-                int imm = combination[i];
-                byteTotal = (byte) (byteTotal|foods.get(i).getNutritionContent().getBytes());
-                combination[i] = imm ;
-            }
-            if(byteTotal ==0b11111){
-                compareHampers(combination);    
-            }
-             // generate next combination in lexicographic order
-            int t = r - 1;
-            while (t != 0 && combination[t] == n - r + t) {
-                t--;
-            }
-            combination[t]++;
-            for (int i = t + 1; i < r; i++) {
-                combination[i] = combination[i - 1] + 1;
-            }
-        }
-    
-    }
-    private static void compareHampers(int[] c){
-        FoodItem[] food = new FoodItem[c.length];
-        for(int i = 0; i<c.length;i++){
-            food[i] = foods.get(c[i]);
+
+    private static void combination(int n, int left, int k){
+        if (k == 0) {
+            add(tmp);
         }
         Hamper compare = new Hamper(food, clients);
         boolean check= checkRequirementsMet(compare);

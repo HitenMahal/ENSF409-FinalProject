@@ -41,6 +41,25 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         else if (event.getActionCommand().equals("Create")) {
             handleClientNumber();
         }
+        else if (event.getActionCommand().equals("Print")) {
+            try {
+                OrderForm.printFormToFile(createdOrder, "C:/Users/hitma/OneDrive/Documents/Programming Work/ENSF 409/ENSF409-FinalProject/HamperReciept.txt");
+            } catch (Exception e) { e.printStackTrace();}
+        }
+        else if (event.getActionCommand().equals("New Order")) {
+            NumberofHampers = 0;
+            Request = null;
+            createdOrder = null;
+            hamperCounter = 0;
+            masterCardLayout.next(masterContainer);
+            setSize(600,200);
+            for (Component panel : masterContainer.getComponents()) {
+                if (panel.getName() == "HamperAsker") {
+                    continue;
+                }
+                masterContainer.remove(panel);
+            }
+        }
     }
 
     public void handleHamperNumber() {
@@ -274,12 +293,25 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
             reciept = "InsufficientFoodException";
         }
 
-        JLabel recieptText = new JLabel(reciept);
+        JButton printButton = new JButton("Print");
+        printButton.addActionListener(this);
+        printButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JButton newOrderButton = new JButton("New Order");
+        newOrderButton.addActionListener(this);
+        newOrderButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel recieptText = new JLabel("<html><pre>" + reciept + "<pre/><html/>");
         JPanel recieptPanel= new JPanel();
+        recieptPanel.setLayout(new BoxLayout(recieptPanel,BoxLayout.Y_AXIS));
+
         recieptPanel.add(recieptText);
+        recieptPanel.add(printButton);
+        recieptPanel.add(newOrderButton);
+
         JScrollPane recieptScroller = new JScrollPane(recieptPanel);
         masterContainer.add(recieptScroller);
         masterCardLayout.next(masterContainer);
+        setSize(600,500);
     }
 
     public String[][] prepareRequest(String[][] request) {
@@ -334,9 +366,17 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
             new FoodItem("15","Quinoa, 1 kg", new int[]{70, 0, 24, 6, 925}),
             new FoodItem("16","Chocolate chip cookies, 500 g", new int[]{71, 0, 1, 29, 2440}),
             new FoodItem("17","Boba green tea, 4 cans", new int[]{88, 0, 0, 12, 924}),
-            new FoodItem("18","Quinoa, 1 kg", new int[]{70, 0, 24, 6, 925}),
-            new FoodItem("19","Chocolate chip cookies, 500 g", new int[]{71, 0, 1, 29, 2440}),
-            new FoodItem("20","Boba green tea, 4 cans", new int[]{88, 0, 0, 12, 924}),
+            new FoodItem("18","Kidney beans, 1 pound", new int[]{72, 0, 28, 0, 385}),
+            new FoodItem("19","Beets, 1 pound", new int[]{0, 87, 13, 0, 193}),
+            new FoodItem("20","Chickpeas, 1 kg", new int[]{67, 0, 22, 11, 1640}),
+            new FoodItem("21","Hummus", new int[]{24, 0, 11, 65, 450}),
+            new FoodItem("22","Beets, 1 pound", new int[]{0, 87, 13, 0, 193}),
+            new FoodItem("23","Carrots", new int[]{0, 100, 0, 0, 264}),
+            new FoodItem("24","Wheaties, family size", new int[]{92, 0, 8, 0, 8000}),
+            new FoodItem("25","Whole wheat flour, 10 kg", new int[]{72, 0, 12, 16, 3660}),
+            new FoodItem("26","Eggs, 1 kg", new int[]{2, 0, 36, 62, 1430}),
+            new FoodItem("27","Avocado, 1 pound", new int[]{19, 76, 5, 0, 725}),
+            new FoodItem("28","Black olives, large tin", new int[]{23, 0, 0, 77, 2200}),
         };
         for (FoodItem food : foods) {
             Inventory.addFoodItem(food);
