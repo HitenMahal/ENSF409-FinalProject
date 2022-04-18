@@ -56,7 +56,7 @@ public class HamperGUI extends JFrame implements ActionListener, MouseListener{
         }
         else if (event.getActionCommand().equals("Print")) {
             try {
-                OrderForm.printFormToFile(createdOrder, "C:/Users/hitma/OneDrive/Documents/Programming Work/ENSF 409/ENSF409-FinalProject/HamperReciept.txt");
+                OrderForm.printFormToFile(createdOrder, "HamperReciept.txt");
             } catch (Exception e) { e.printStackTrace();}
         }
         else if (event.getActionCommand().equals("New Order")) {

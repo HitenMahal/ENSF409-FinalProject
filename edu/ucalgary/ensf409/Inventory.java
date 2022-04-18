@@ -131,8 +131,7 @@ public class Inventory
                 int Protein = results.getInt("Protein");
                 int Other = results.getInt("Other");
                 int Calories = results.getInt("Calories");
-                needs[i] = new NutritionContent(WholeGrains*Calories/100, FruitVeggies*Calories/100, Protein*Calories/100, Other*Calories/100, Calories);
-                // needs[i] = new NutritionContent(WholeGrains*Calories/100*7, FruitVeggies*Calories/100*7, Protein*Calories/100*7, Other*Calories/100*7, Calories*7);
+                needs[i] = new NutritionContent(WholeGrains*Calories/100*7, FruitVeggies*Calories/100*7, Protein*Calories/100*7, Other*Calories/100*7, Calories*7);
                 i++;
             }
             client_daily_needs = needs;

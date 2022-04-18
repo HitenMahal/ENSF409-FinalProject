@@ -2,6 +2,12 @@ package edu.ucalgary.ensf409;
 
 import java.util.*;
 
+/**
+ * CalculateHamper is a class that contains 3 important static public methods
+ * calculateHamper will calculate and return the most optimal hamper possible using FoodItems currently in the Inventory
+ * calculateNutritionWaste will return an integer of calories wasted of any given Hamper
+ * and calculateHamperNutrition will calculate the total nutrition contained in a Hamper
+ */
 public class CalculateHamper{
     private static LinkedList<int[]> combinations = new LinkedList<int[]>();
     private static LinkedList<Integer> tmp = new LinkedList<Integer>();
@@ -11,6 +17,12 @@ public class CalculateHamper{
     private static Client clients[];
     private static int[] theChosenOne;
 
+    /**
+     * Calculates the most optimal hamper with the least nutrition wasted using FoodItems from the Inventory
+     * Throws a InsufficientFoodException if such a hamper is not possible using the current Inventory
+     * @param order
+     * @return The most efficient Hamper it is able to calculate
+     */
     public static Hamper calculateHamper(String[] order) throws InsufficientFoodException{
         combinations.clear();
         tmp.clear();
@@ -34,12 +46,20 @@ public class CalculateHamper{
             }
             allAreOverShot = true;
         }
-        
         if(!checkRequirementsMet(hamper)){
+            
+            Hamper h = new Hamper((FoodItem[])Inventory.getInventory().toArray(), clients);
             String errorMessage = "There is insufficient food in the inventory to complete the request.\nHere is the nutrition still needed:\n";
-            int[] scuffed = new int[]{7,136,23,10,176};
-            int[] needed = hamper.getNutritionNeeded().getNutrition();
-            int[] have = hamper.getNutritionContent().getNutrition();
+            int[] needed = h.getNutritionNeeded().getNutrition();
+            int[] have = h.getNutritionContent().getNutrition();
+            int[] scuffed = {0,0,0,0,0};
+
+            for(int i = 0;i<needed.length;i++){
+                if(have[i] < needed[i]){
+                    scuffed[i] = have[i]-needed[i];
+                }
+            }
+            
             for (int i=0; i < needed.length;i++) {
                 String typeMessage = "";
                 // if ( have[i] < needed[i] ) {
@@ -73,7 +93,12 @@ public class CalculateHamper{
         }
         return hamper;
     }
-
+    
+    /**
+     * Helper method for calculateHamper(), calculates all possible hampers of a given inventory
+     * @param n length of the inventory
+     * @param r index of current food item that the combination is being calculated off of
+     */
     public static void combination(int n, int r) {
         int[] combination = new int[r];
     
@@ -105,6 +130,11 @@ public class CalculateHamper{
     
     }
 
+    /**
+     * Helper Method for calculateHamper()
+     * compares two hampers to determine which is more efficient
+     * @param c a int[] representing the indeices of FoodItems in the inventory. For example [1,2,3] would refer to foods 1,2, and 3 in the inventory
+     */
     private static void compareHampers(int[] c){
         FoodItem[] food = new FoodItem[c.length];
         for(int i = 0; i<c.length;i++){
@@ -134,6 +164,11 @@ public class CalculateHamper{
         }
     }
 
+    /**
+     * Helper method for calculateHamper()
+     * @param hamper
+     * @return an integer representing how many calories are wasted, may be negative
+     */
     private static int calculateNegativeWaste(Hamper hamper){
         int[]items = hamper.getNutritionContent().getNutrition();
         int[]needed = hamper.getNutritionNeeded().getNutrition();
@@ -147,6 +182,11 @@ public class CalculateHamper{
         return total;
     }
 
+    /**
+     * Calculates the total nutritional values of a given hamper
+     * @param hamper
+     * @return an int[] representing the nutritional values stored in the hamper
+     */
     public static int[] calculateHamperNutrition(Hamper hamper){
         int[] n = {0,0,0,0,0};
         for(FoodItem c: hamper.getContents()){
@@ -156,6 +196,12 @@ public class CalculateHamper{
         }
         return n;
     }
+
+    /**
+     * Helper function for calculateHamper() that checks to see if the hamper given meets all the requirements of its clients
+     * @param hamper1
+     * @return boolean representing if the hamper given meets all the requirements of its clients
+     */
     private static boolean checkRequirementsMet(Hamper hamper1){
         int[] have = hamper1.getNutritionContent().getNutrition();
         int[] needs = hamper1.getNutritionNeeded().getNutrition();
@@ -168,6 +214,12 @@ public class CalculateHamper{
         return true;
     }
 
+
+    /**
+     * Calculates how many calories a given hamper is wasting based on the clients that hamper serves
+     * @param hamper
+     * @return an int representing total calories wasted
+     */
     public static int calculateNutritionWaste(Hamper hamper){
         int items = hamper.getNutritionContent().getCalories();
         int needed =hamper.getNutritionNeeded().getCalories();
