@@ -1,5 +1,7 @@
 # ENSF409-FinalProject
 
+Code Version: 1.7
+
 Group Members:  
 Hiten Mahalwar  
 Toshi Biswas  
