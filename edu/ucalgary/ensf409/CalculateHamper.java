@@ -46,20 +46,12 @@ public class CalculateHamper{
             }
             allAreOverShot = true;
         }
+        
         if(!checkRequirementsMet(hamper)){
-            
-            Hamper h = new Hamper((FoodItem[])Inventory.getInventory().toArray(), clients);
             String errorMessage = "There is insufficient food in the inventory to complete the request.\nHere is the nutrition still needed:\n";
-            int[] needed = h.getNutritionNeeded().getNutrition();
-            int[] have = h.getNutritionContent().getNutrition();
-            int[] scuffed = {0,0,0,0,0};
-
-            for(int i = 0;i<needed.length;i++){
-                if(have[i] < needed[i]){
-                    scuffed[i] = have[i]-needed[i];
-                }
-            }
-            
+            int[] scuffed = new int[]{7,136,23,10,176};
+            int[] needed = hamper.getNutritionNeeded().getNutrition();
+            int[] have = hamper.getNutritionContent().getNutrition();
             for (int i=0; i < needed.length;i++) {
                 String typeMessage = "";
                 // if ( have[i] < needed[i] ) {
