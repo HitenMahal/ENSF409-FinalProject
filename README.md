@@ -18,7 +18,7 @@ The program connects to database 'food_inventory' with username 'student' and pa
 To compile the code:  
     javac -cp .;lib/mysql-connector-java-8.0.23.jar edu/ucalgary/ensf409/*.java  
 To run the program:  
-    java -cp .;lib/mysql-connector-java-8.0.23.jar edu.ucalgary.ensf409.HamperGUI.java  
+    java -cp .;lib/mysql-connector-java-8.0.23.jar edu.ucalgary.ensf409.HamperGUI 
 
 # FOR TESTING  
 Please make sure that the program files are also compiled.  
