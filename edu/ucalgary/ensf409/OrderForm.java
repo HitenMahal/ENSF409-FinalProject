@@ -13,6 +13,11 @@ public class OrderForm {
      * @return Form as a string
      */
     public static String getOrderForm(Order order) {
+
+        if (order == null) {
+            return "The OrderForm you are trying to print is invalid due to there being insufficient food to fulfill that order, please try again";
+        }
+
         String output = "Group 21 Food Bank\n";
         output += "Hamper Order Form\n\nName:\nDate:\n\n";
         
@@ -63,6 +68,7 @@ public class OrderForm {
             outputFile.println(getOrderForm(order));
             outputFile.close();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new FileAccessException("File access prevented, please check if program has authority to access that file");
         }
         return;
